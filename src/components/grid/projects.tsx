@@ -193,6 +193,10 @@ function ProjectAccordion({ items }: Readonly<{ items: ProjectItem[] }>) {
 function ProjectTechnologies({
   technologies,
 }: Readonly<{ technologies: ProjectTechnology[] }>) {
+  const orderedTechnologies = [...technologies].sort(
+    (a, b) => b.label.length - a.label.length,
+  );
+
   return (
     <div className='mt-5 flex flex-col gap-y-4'>
       <Typography variant='h4' size='sm'>
@@ -200,7 +204,7 @@ function ProjectTechnologies({
       </Typography>
 
       <ul className='flex flex-wrap gap-2.5'>
-        {technologies.map((technology) => {
+        {orderedTechnologies.map((technology) => {
           const skill = getTechnologySkill(technology.skillId);
 
           if (!skill) {

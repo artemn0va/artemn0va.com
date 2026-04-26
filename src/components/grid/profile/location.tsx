@@ -12,7 +12,7 @@ export default function Location() {
       </Typography>
       <div className='flex items-center gap-x-1'>
         <MapPinIcon className='w-[22px] h-[22px] fill-[#29303E] dark:fill-white 2xl:fill-white 2xl:dark:fill-[#29303E]' />
-        <Typography isThemeRevert>Tel Aviv, Israel</Typography>
+        <Typography isThemeRevert>Israel, Tel Aviv</Typography>
       </div>
     </Section>
   );

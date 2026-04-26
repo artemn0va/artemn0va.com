@@ -22,7 +22,7 @@ export default function Years() {
           <div className='absolute top-[28.98px] left-[29.28px] md:top-[30.91px] md:left-[30.91px] bg-page shadow-years-outer dark:bg-section-dark dark:shadow-years-outer-dark p-[3.35px] md:p-[3.53px] 2xl:top-[35px] 2xl:left-[35px] 2xl:p-1 0 rounded-full'>
             <div className='w-[60.24px] h-[60.24px] md:w-[63.58px] md:h-[63.58px] 2xl:w-[72px] 2xl:h-[72px] bg-page shadow-years-inner dark:bg-section-dark dark:shadow-years-inner-dark rounded-full flex justify-center items-center'>
               <p className='max-w-max bg-years-text-gradient dark:bg-years-text-gradient-dark text-transparent bg-clip-text text-[33.5px] leading-[36.8px]'>
-                4
+                6
               </p>
             </div>
           </div>
