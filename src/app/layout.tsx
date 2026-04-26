@@ -40,12 +40,12 @@ export const metadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     images: [`${siteConfig.url}/images/og.jpg`],
-    // creator: '@artemshchirov',
+    // creator: '@artemnova',
   },
   // authors: [
   //   {
-  //     name: 'Artem Shchirov',
-  //     url: 'https://github.com/artemshchirov',
+  //     name: 'Artem Nova',
+  //     url: 'https://github.com/artemnova',
   //   },
   // ],
 };

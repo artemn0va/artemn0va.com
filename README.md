@@ -1,6 +1,6 @@
 # artemn0va.com
 
-Personal CV and portfolio site for Artem Shchirov.
+Personal CV and portfolio site for Artem Nova.
 
 ## Stack
 

@@ -13,24 +13,24 @@ export type Contact = {
 
 const contactsData: Contact[] = [
   {
-    url: 'https://github.com/artemshchirov',
+    url: 'https://github.com/artemn0va',
     icon: <GitHubIcon className='w-[28px] h-[28px]' />,
     label: 'GitHub',
   },
   {
-    url: 'https://twitter.com/username',
+    url: 'https://linkedin.com/in/artemn0va',
     icon: <LinkedInIcon className='w-[22.75px] h-[22.75px]' />,
-    label: 'Twitter',
+    label: 'LinkedIn',
   },
   {
     url: 'https://wa.me/+972584441705',
     icon: <WhatsAppIcon className='w-[24px] h-[24px]' />,
-    label: 'Twitter',
+    label: 'WhatsApp',
   },
   {
-    url: 'mailto:artemshchirov@gmail.com',
+    url: 'mailto:helloartemnova@gmail.com',
     icon: <EmailIcon className='w-[28px] h-[28px]' />,
-    label: 'Twitter',
+    label: 'Email',
   },
 ];
 

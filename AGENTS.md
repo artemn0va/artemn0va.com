@@ -4,7 +4,7 @@ This is the operating guide for AI coding agents working on this repository. Rea
 
 ## Project Snapshot
 
-- Personal CV/portfolio site for Artem Shchirov.
+- Personal CV/portfolio site for Artem Nova.
 - Stack: Next.js 14 App Router, React 18, TypeScript, Tailwind CSS, Radix/shadcn-style UI primitives, Jest, Testing Library.
 - Package manager: pnpm. Use the version recorded in `package.json` and Node `v20.10.0` from `.nvmrc`.
 - Main app routes live under `src/app`.
