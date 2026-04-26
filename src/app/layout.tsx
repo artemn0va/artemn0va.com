@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   // authors: [
   //   {
   //     name: 'Artem Nova',
-  //     url: 'https://github.com/artemnova',
+  //     url: 'https://github.com/artemn0va',
   //   },
   // ],
 };

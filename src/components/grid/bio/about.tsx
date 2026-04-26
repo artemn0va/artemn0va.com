@@ -12,14 +12,14 @@ export default function About() {
       </Typography>
       <div
         className={cn(
-          'relative overflow-hidden transition-max-height duration-300 ease-in-out'
+          'relative overflow-hidden transition-max-height duration-300 ease-in-out',
         )}
       >
         <Typography isThemeRevert>
-          Hi, I am Artem. Web developer with a strong passion for innovation,
-          creativity, and the transformation of more ideas into remarkable web
-          applications. My background in various programming languages and
-          frameworks
+          Hi, I am Artem. Full Stack Developer passionate about system design
+          and versatile tools. I use TypeScript and Python to build ordered
+          systems that save time, scale reliably, and make products easier to
+          use.
         </Typography>
       </div>
     </Section>

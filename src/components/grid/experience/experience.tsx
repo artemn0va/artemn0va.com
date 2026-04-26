@@ -23,7 +23,7 @@ export default function Experience() {
     },
     {
       value: 'education',
-      label: 'Education',
+      label: 'Languages',
       content: <AccordionComponent items={educationData} />,
     },
   ];
@@ -35,7 +35,7 @@ export default function Experience() {
         className='flex flex-col gap-y-4 px-4 pt-3.5 pb-5'
       >
         <Typography isThemeRevert variant='h2' size='sm' className='ml-1'>
-          Experience & Education
+          Experience & Languages
         </Typography>
         <TabsComponent defaultValue='experience' items={tabsItems} />
       </Section>

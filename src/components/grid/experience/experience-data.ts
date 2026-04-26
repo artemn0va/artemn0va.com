@@ -1,86 +1,61 @@
 const experienceData = [
   {
-    id: 'widegamut',
-    date: '2023-2024',
-    title: 'Widegamut',
-    subtitle: 'Full-Stack Developer',
-    achievements: [
-      {
-        text: 'Created 4 apps with a focus on creating an exceptional user experience.',
-      },
-      {
-        text: 'Wrote frontend & backend code, and self-integrated 2+ APIs. For example, fetching data to dashboard.',
-      },
-      {
-        text: 'Resolved critical bugs to resolve issues and improve performance to ensure ongoing operations.',
-      },
-    ],
-  },
-  {
-    id: 'beeri-print',
-    date: '2023-2024',
-    title: 'Be`eri Print',
-    subtitle: 'Frontend Developer',
-    achievements: [
-      {
-        text: 'Created 4 apps with a focus on creating an exceptional user experience.',
-      },
-      {
-        text: 'Wrote frontend & backend code, and self-integrated 2+ APIs. For example, fetching data to dashboard.',
-      },
-      {
-        text: 'Resolved critical bugs to resolve issues and improve performance to ensure ongoing operations.',
-      },
-    ],
-  },
-  {
-    id: 'digital-solutions',
-    date: '2022-2023',
-    title: 'Digital Solutions',
-    subtitle: 'Software Engineer',
-    achievements: [
-      {
-        text: 'Optimized application performance, achieving a 30% improvement in processing speed.',
-      },
-      {
-        text: 'Collaborated with cross-functional teams to develop a scalable product that grew user base by 150% in 12 months.',
-      },
-      {
-        text: 'Authored technical documentation that is now used as the standard for project development phases.',
-      },
-    ],
-  },
-  {
-    id: 'innotech',
-    date: '2021-2022',
-    title: 'InnoTech',
+    id: 'yoobic',
+    date: '2024 - 2026',
+    title: 'Yoobic',
     subtitle: 'Backend Developer',
     achievements: [
       {
-        text: 'Enhanced data security measures, reducing vulnerability to data breaches by 70%.',
+        text: 'Identified and resolved critical memory leaks in backend services, reducing memory usage by over 30% and eliminating production out-of-memory errors.',
       },
       {
-        text: 'Automated data backup systems, significantly reducing the risk of data loss.',
+        text: 'Provisioned 15+ GCP monitoring dashboards and 50+ alert rules with Pulumi, reducing mean time to detection by 40%.',
       },
       {
-        text: 'Introduced API caching mechanisms that decreased the load times by 40%.',
+        text: 'Delivered 4 end-to-end backend features from prototype through product and frontend alignment.',
+      },
+      {
+        text: 'Maintained and enhanced multiple company codebases, including legacy monoliths, improving system stability.',
       },
     ],
   },
   {
-    id: 'cloudnet-services',
-    date: '2020-2021',
-    title: 'CloudNet Services',
-    subtitle: 'Cloud Architect',
+    id: 'widegamut',
+    date: '2021 - 2023',
+    title: 'Widegamut',
+    subtitle: 'Full Stack Developer',
     achievements: [
       {
-        text: 'Designed and implemented a multi-cloud architecture that improved system redundancy and availability.',
+        text: 'Created the frontend and backend for a filmmaker portfolio platform from Figma designs and a high-level PRD.',
       },
       {
-        text: 'Lead the migration of legacy systems to the cloud, cutting operational costs by 50% while improving uptime.',
+        text: 'Integrated 9+ internal and external APIs, including payment APIs.',
       },
       {
-        text: 'Developed custom cloud monitoring tools that enhanced the operational insights into system performance.',
+        text: 'Deployed apps to Vercel and DigitalOcean, including database clusters, backups, Amazon S3 storage, and Doppler-managed environments.',
+      },
+      {
+        text: 'Worked with Kanban alongside UX/UI and the CEO, iterating product flows from feedback.',
+      },
+    ],
+  },
+  {
+    id: 'butcher-studio',
+    date: '2021 - 2023',
+    title: 'Butcher Studio',
+    subtitle: 'Full Stack Developer',
+    achievements: [
+      {
+        text: 'Created 3+ pixel-perfect React landing pages from Figma, each connected to backend services based on client requirements.',
+      },
+      {
+        text: 'Built an online store with React, a cloud database, delivery integrations, marketing services, and admin CRM features.',
+      },
+      {
+        text: 'Integrated marketing and form/payment data collection solutions for business owners.',
+      },
+      {
+        text: 'Worked in Scrum and Agile team workflows across client delivery.',
       },
     ],
   },

@@ -9,14 +9,14 @@ interface Props {
 export default function Copyright({ className }: Readonly<Props>) {
   return (
     <Link
-      href='https://github.com/artemnova'
+      href='https://github.com/artemn0va'
       target='_blank'
       className={cn(
         'text-sm text-[#A5A9B0] max-w-max hover:underline',
         className
       )}
     >
-      © 2024 Ɐrtem
+      © 2026 Ɐrtem Nova
     </Link>
   );
 }

@@ -12,7 +12,7 @@ export default function Role() {
         size='sm'
         className='2xl:text-base text-[#60656E] dark:text-[#D5D5D5] 2xl:text-[#D5D5D5] 2xl:dark:text-[#60656E]'
       >
-        Full-Stack Developer
+        Full Stack Developer
       </Typography>
     </Section>
   );
