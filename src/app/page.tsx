@@ -22,7 +22,7 @@ export default function HomePage() {
       <Section className='grid-main 2xl:px-[60px] 2xl:py-9 relative'>
         <Header />
 
-        <div className='hidden 2xl:block bg-page-dark dark:bg-page shadow-divider dark:shadow-divider-dark absolute top-0 right-[calc(100%-508px)] bottom-0 left-0 rounded-r-[24px] overflow-hidden -z-10' />
+        <div className='hidden 2xl:block bg-page-dark dark:bg-page shadow-divider dark:shadow-divider-dark absolute top-0 right-[calc(100%-508px)] bottom-0 left-[calc((100vw-100%)/-2)] rounded-r-[24px] overflow-hidden -z-10' />
         <div className='hidden 2xl:block divider -z-20' />
 
         <Profile />
