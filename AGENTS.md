@@ -79,8 +79,7 @@ pnpm format:check
 - Keep docs short, factual, and project-specific.
 - If implementation and docs disagree, fix the docs in the same change.
 
-## Known Project Notes
+## Project Notes
 
-- `README.md` still contains substantial starter-template material. Prefer `docs/` for current project guidance until the README is rewritten.
-- Some test directory names use the existing misspelling `compontents`. Preserve existing paths unless doing an intentional cleanup.
-- The site config currently lives in `src/constant/config.ts`; metadata is wired in `src/app/layout.tsx`.
+- `README.md` and `docs/` contain the current project-specific guidance.
+- Site config lives in `src/constant/config.ts`; metadata is wired in `src/app/layout.tsx`.

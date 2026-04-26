@@ -15,7 +15,7 @@
 - Library tests: `src/lib/__tests__`.
 - 2048 tests cover reducer behavior, context behavior, hooks, and components.
 
-Some existing 2048 component tests are under `src/__tests__/2048/compontents`. Keep the current path spelling unless a task explicitly asks for cleanup.
+2048 component tests are under `src/__tests__/2048/components`.
 
 ## What To Test
 
