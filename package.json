@@ -1,6 +1,9 @@
 {
-  "name": "ts-nextjs-tailwind-starter",
-  "version": "0.1.0",
+  "name": "artemn0va.com",
+  "version": "0.9.1",
+  "author": "Artem Nova",
+  "description": "Personal website of Artem Nova - a software engineer and web developer",
+  "repository": "https://github.com/artemn0va/artemn0va.com",
   "private": true,
   "scripts": {
     "dev": "next dev",
