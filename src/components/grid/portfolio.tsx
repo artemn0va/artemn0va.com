@@ -18,6 +18,7 @@ import {
 import Section from '@/layouts/section';
 
 const imageSizes = '(min-width: 1440px) 306px, (min-width: 768px) 622px, 238px';
+const imageQuality = 80;
 const imageFrameClassName = 'relative h-full w-full overflow-hidden';
 const imageBackgroundClassName =
   'absolute inset-0 h-full w-full scale-110 object-cover blur-xl brightness-95 saturate-125 dark:brightness-75';
@@ -100,9 +101,77 @@ const portfolioSlides: PortfolioSlide[] = [
   },
 ];
 
+function PortfolioSlideImage({ slide }: Readonly<{ slide: PortfolioSlide }>) {
+  return slide.themeSrc ? (
+    <div className={imageFrameClassName}>
+      <Image
+        src={slide.themeSrc.light}
+        alt=''
+        width={slide.width}
+        height={slide.height}
+        sizes={imageSizes}
+        quality={imageQuality}
+        className={cn(imageBackgroundClassName, 'dark:hidden')}
+        aria-hidden='true'
+      />
+      <Image
+        src={slide.themeSrc.dark}
+        alt=''
+        width={slide.themeSrc.darkWidth}
+        height={slide.themeSrc.darkHeight}
+        sizes={imageSizes}
+        quality={imageQuality}
+        className={cn(imageBackgroundClassName, 'hidden dark:block')}
+        aria-hidden='true'
+      />
+      <Image
+        src={slide.themeSrc.light}
+        alt={slide.alt}
+        width={slide.width}
+        height={slide.height}
+        sizes={imageSizes}
+        quality={imageQuality}
+        className={cn(imageForegroundClassName, 'dark:hidden')}
+      />
+      <Image
+        src={slide.themeSrc.dark}
+        alt={slide.alt}
+        width={slide.themeSrc.darkWidth}
+        height={slide.themeSrc.darkHeight}
+        sizes={imageSizes}
+        quality={imageQuality}
+        className={cn(imageForegroundClassName, 'hidden dark:block')}
+      />
+    </div>
+  ) : (
+    <div className={imageFrameClassName}>
+      <Image
+        src={slide.src}
+        alt=''
+        width={slide.width}
+        height={slide.height}
+        sizes={imageSizes}
+        quality={imageQuality}
+        className={imageBackgroundClassName}
+        aria-hidden='true'
+      />
+      <Image
+        src={slide.src}
+        alt={slide.alt}
+        width={slide.width}
+        height={slide.height}
+        sizes={imageSizes}
+        quality={imageQuality}
+        className={imageForegroundClassName}
+      />
+    </div>
+  );
+}
+
 export default function Portfolio() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const previousPreviewSlide = portfolioSlides[portfolioSlides.length - 1];
 
   useEffect(() => {
     if (!api) {
@@ -126,13 +195,24 @@ export default function Portfolio() {
           Latest Work
         </Typography>
         <Carousel
-          className='w-full h-full flex flex-col'
+          className='w-full h-full flex flex-col overflow-hidden'
           setApi={setApi}
           opts={{
             loop: true,
           }}
         >
-          <CarouselContent className='-ml-0 pt-4 pb-7'>
+          <Card
+            aria-hidden='true'
+            className={cn(
+              'pointer-events-none absolute left-[calc((100%_-_238px)/2_-_238px)] top-4 z-0 h-[238px] w-[238px] scale-[.828] overflow-hidden bg-page shadow-section-outer transition-opacity duration-300 dark:bg-section-dark dark:shadow-section-outer-dark md:left-[calc((100%_-_622px)/2_-_622px)] md:h-[622px] md:w-[622px] md:scale-[.9] 2xl:left-[calc((100%_-_306px)/2_-_306px)] 2xl:h-[306px] 2xl:w-[306px] 2xl:scale-[.88]',
+              api && 'opacity-0',
+            )}
+          >
+            <CardContent className='flex aspect-square items-center justify-center p-0'>
+              <PortfolioSlideImage slide={previousPreviewSlide} />
+            </CardContent>
+          </Card>
+          <CarouselContent className='relative z-10 -ml-0 translate-x-[calc((100%_-_238px)/2)] pt-4 pb-7 md:translate-x-[calc((100%_-_622px)/2)] 2xl:translate-x-[calc((100%_-_306px)/2)]'>
             {portfolioSlides.map((slide, index) => {
               return (
                 <CarouselItem key={index} className={cn('pl-0 basis-auto')}>
@@ -146,76 +226,7 @@ export default function Portfolio() {
                     )}
                   >
                     <CardContent className='flex aspect-square items-center justify-center p-0'>
-                      {slide.themeSrc ? (
-                        <div className={imageFrameClassName}>
-                          <Image
-                            src={slide.themeSrc.light}
-                            alt=''
-                            width={slide.width}
-                            height={slide.height}
-                            sizes={imageSizes}
-                            className={cn(
-                              imageBackgroundClassName,
-                              'dark:hidden',
-                            )}
-                            aria-hidden='true'
-                          />
-                          <Image
-                            src={slide.themeSrc.dark}
-                            alt=''
-                            width={slide.themeSrc.darkWidth}
-                            height={slide.themeSrc.darkHeight}
-                            sizes={imageSizes}
-                            className={cn(
-                              imageBackgroundClassName,
-                              'hidden dark:block',
-                            )}
-                            aria-hidden='true'
-                          />
-                          <Image
-                            src={slide.themeSrc.light}
-                            alt={slide.alt}
-                            width={slide.width}
-                            height={slide.height}
-                            sizes={imageSizes}
-                            className={cn(
-                              imageForegroundClassName,
-                              'dark:hidden',
-                            )}
-                          />
-                          <Image
-                            src={slide.themeSrc.dark}
-                            alt={slide.alt}
-                            width={slide.themeSrc.darkWidth}
-                            height={slide.themeSrc.darkHeight}
-                            sizes={imageSizes}
-                            className={cn(
-                              imageForegroundClassName,
-                              'hidden dark:block',
-                            )}
-                          />
-                        </div>
-                      ) : (
-                        <div className={imageFrameClassName}>
-                          <Image
-                            src={slide.src}
-                            alt=''
-                            width={slide.width}
-                            height={slide.height}
-                            sizes={imageSizes}
-                            className={imageBackgroundClassName}
-                            aria-hidden='true'
-                          />
-                          <Image
-                            src={slide.src}
-                            alt={slide.alt}
-                            width={slide.width}
-                            height={slide.height}
-                            sizes={imageSizes}
-                            className={imageForegroundClassName}
-                          />
-                        </div>
-                      )}
+                      <PortfolioSlideImage slide={slide} />
                     </CardContent>
                   </Card>
                 </CarouselItem>
