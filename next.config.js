@@ -6,8 +6,11 @@ const nextConfig = {
         hostname: 'ik.imagekit.io',
         protocol: 'https',
       },
+      {
+        hostname: 'skillicons.dev',
+        protocol: 'https',
+      },
     ],
-    unoptimized: true,
   },
 
   eslint: {

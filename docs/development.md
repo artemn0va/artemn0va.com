@@ -67,4 +67,4 @@ When adding env vars:
 
 - Vercel config lives in `vercel.json`.
 - Sitemap generation is configured through `next-sitemap.config.js` and the `postbuild` script.
-- Images are currently configured with `unoptimized: true` in `next.config.js`.
+- Next.js image optimization is enabled through the default image optimizer.

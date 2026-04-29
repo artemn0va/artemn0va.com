@@ -30,7 +30,7 @@ export default function Skills() {
   const groupedSkillsDesktop = [];
   for (let i = 0; i < skillsData.length; i += SKILLS_PER_SLIDE_DESKTOP) {
     groupedSkillsDesktop.push(
-      skillsData.slice(i, i + SKILLS_PER_SLIDE_DESKTOP)
+      skillsData.slice(i, i + SKILLS_PER_SLIDE_DESKTOP),
     );
   }
 
@@ -107,6 +107,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ src, name }) => (
       alt={name}
       width={57.7}
       height={57.7}
+      unoptimized
     />
     <Typography className='mx-auto' size='sm'>
       {name}
