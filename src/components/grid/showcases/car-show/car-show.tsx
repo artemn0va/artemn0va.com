@@ -7,7 +7,7 @@ import {
   OrbitControls,
   PerspectiveCamera,
 } from '@react-three/drei';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import {
   type ComponentType,
   type ReactNode,
@@ -32,6 +32,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 import { cn } from '@/lib/utils';
 
+import CarShowLoader from '@/components/grid/showcases/car-show/car-show-loader';
+
 const ASSET_BASE = '/car-show';
 const TypedCubeCamera = CubeCamera as unknown as ComponentType<{
   children: (texture: Texture) => ReactNode;
@@ -41,6 +43,10 @@ const TypedCubeCamera = CubeCamera as unknown as ComponentType<{
 
 interface Props {
   isFullscreen?: boolean;
+}
+
+interface CarSceneProps {
+  onReady: () => void;
 }
 
 function Car() {
@@ -280,7 +286,19 @@ function Rings() {
   );
 }
 
-function CarScene() {
+function SceneReadyMarker({ onReady }: Readonly<CarSceneProps>) {
+  useEffect(() => {
+    const frame = requestAnimationFrame(onReady);
+
+    return () => {
+      cancelAnimationFrame(frame);
+    };
+  }, [onReady]);
+
+  return null;
+}
+
+function CarScene({ onReady }: Readonly<CarSceneProps>) {
   const renderCar = (texture: Texture) => (
     <>
       <Environment map={texture} />
@@ -321,25 +339,47 @@ function CarScene() {
       <FloatingGrid />
       <Boxes />
       <Rings />
+      <SceneReadyMarker onReady={onReady} />
     </>
   );
 }
 
+function WebGLContextCleanup() {
+  const gl = useThree((state) => state.gl);
+
+  useEffect(() => {
+    return () => {
+      gl.dispose();
+      gl.forceContextLoss();
+    };
+  }, [gl]);
+
+  return null;
+}
+
 export default function CarShow({ isFullscreen = false }: Readonly<Props>) {
+  const [isSceneReady, setIsSceneReady] = useState(false);
+
   return (
     <div
       className={cn(
-        'w-full overflow-hidden bg-black',
+        'relative w-full overflow-hidden bg-black',
         isFullscreen
           ? 'h-screen'
           : 'h-[300px] rounded-xl md:h-[320px] 2xl:h-full 2xl:min-h-[220px]',
       )}
     >
-      <Suspense fallback={null}>
-        <Canvas shadows>
-          <CarScene />
-        </Canvas>
-      </Suspense>
+      {!isSceneReady && (
+        <div className='absolute inset-0 z-10'>
+          <CarShowLoader />
+        </div>
+      )}
+      <Canvas shadows>
+        <WebGLContextCleanup />
+        <Suspense fallback={null}>
+          <CarScene onReady={() => setIsSceneReady(true)} />
+        </Suspense>
+      </Canvas>
     </div>
   );
 }
