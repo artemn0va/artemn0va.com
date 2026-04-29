@@ -62,7 +62,9 @@ export default function GameProvider({
   };
 
   const getTiles = () => {
-    return gameState.tilesByIds.map((tileId) => gameState.tiles[tileId]);
+    return gameState.tilesByIds
+      .map((tileId) => gameState.tiles[tileId])
+      .filter((tile): tile is Tile => !isNil(tile));
   };
 
   const moveTiles = useCallback(

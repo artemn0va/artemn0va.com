@@ -1,5 +1,15 @@
 # artemn0va.com
 
+# TODO
+
+- [ ] Optimize car-show images 
+- [ ] Add menu to 2048
+- [ ] Add fullscreen to 2048
+- [ ] Add fullscreen to car-show
+- [ ] Add route to 2048
+- [ ] Add route to car-show
+- [ ] Third slide bitcoin in real time?
+
 Personal CV and portfolio site for Artem Nova.
 
 ## Stack

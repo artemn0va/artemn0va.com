@@ -3,9 +3,13 @@ import Score from '@/components/grid/showcases/2048/components/score';
 
 interface Props {
   isFullscreen?: boolean;
+  isKeyboardEnabled?: boolean;
 }
 
-export default function Game2048({ isFullscreen = false }: Readonly<Props>) {
+export default function Game2048({
+  isFullscreen = false,
+  isKeyboardEnabled = true,
+}: Readonly<Props>) {
   return (
     <div>
       {isFullscreen && (
@@ -15,7 +19,7 @@ export default function Game2048({ isFullscreen = false }: Readonly<Props>) {
         </header>
       )}
       <main>
-        <Board />
+        <Board isKeyboardEnabled={isKeyboardEnabled} />
       </main>
 
       {/* <footer>

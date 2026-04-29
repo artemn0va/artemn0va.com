@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import Board from '@/components/grid/showcases/2048/components/board';
 import GameProvider from '@/components/grid/showcases/2048/context/game-context';
@@ -24,5 +24,21 @@ describe('Board', () => {
     const tiles = container.querySelectorAll('.tile');
 
     expect(tiles.length).toEqual(2);
+  });
+
+  it('should ignore window arrow keys when keyboard input is disabled', () => {
+    const { container } = render(
+      <GameProvider>
+        <Board isKeyboardEnabled={false} />
+      </GameProvider>,
+    );
+
+    fireEvent.keyDown(window, {
+      key: 'ArrowUp',
+      code: 'ArrowUp',
+    });
+
+    expect(container.querySelectorAll('.tile4')).toHaveLength(0);
+    expect(container.querySelectorAll('.tile2')).toHaveLength(2);
   });
 });

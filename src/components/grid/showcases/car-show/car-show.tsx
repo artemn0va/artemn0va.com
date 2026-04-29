@@ -10,6 +10,7 @@ import {
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import {
   type ComponentType,
+  type ElementRef,
   type ReactNode,
   Suspense,
   useEffect,
@@ -47,6 +48,24 @@ interface Props {
 
 interface CarSceneProps {
   onReady: () => void;
+}
+
+const CAMERA_ROTATION_STEP = 0.08;
+const MIN_POLAR_ANGLE = 0.2;
+const CAMERA_PAN_STEP = 0.2;
+const ARROW_KEYS = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'] as const;
+
+function isEditableTarget(target: EventTarget | null) {
+  if (!(target instanceof HTMLElement)) {
+    return false;
+  }
+
+  return (
+    target.isContentEditable ||
+    target.tagName === 'INPUT' ||
+    target.tagName === 'TEXTAREA' ||
+    target.tagName === 'SELECT'
+  );
 }
 
 function Car() {
@@ -299,6 +318,109 @@ function SceneReadyMarker({ onReady }: Readonly<CarSceneProps>) {
 }
 
 function CarScene({ onReady }: Readonly<CarSceneProps>) {
+  const controlsRef = useRef<ElementRef<typeof OrbitControls> | null>(null);
+  const isPanModifierPressed = useRef(false);
+  const pressedArrowKeys = useRef<Set<string>>(new Set());
+  const camera = useThree((state) => state.camera);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (isEditableTarget(event.target)) {
+        return;
+      }
+
+      if (event.code === 'Space') {
+        isPanModifierPressed.current = true;
+        event.preventDefault();
+        return;
+      }
+
+      if (ARROW_KEYS.includes(event.key as (typeof ARROW_KEYS)[number])) {
+        pressedArrowKeys.current.add(event.key);
+        event.preventDefault();
+      }
+    };
+
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (event.code === 'Space') {
+        isPanModifierPressed.current = false;
+        event.preventDefault();
+      }
+
+      if (ARROW_KEYS.includes(event.key as (typeof ARROW_KEYS)[number])) {
+        pressedArrowKeys.current.delete(event.key);
+        event.preventDefault();
+      }
+    };
+
+    const handleWindowBlur = () => {
+      isPanModifierPressed.current = false;
+      pressedArrowKeys.current.clear();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
+    window.addEventListener('blur', handleWindowBlur);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener('blur', handleWindowBlur);
+    };
+  }, []);
+
+  useFrame((_state, delta) => {
+    const controls = controlsRef.current;
+
+    if (!controls) {
+      return;
+    }
+
+    const horizontalInput =
+      (pressedArrowKeys.current.has('ArrowRight') ? 1 : 0) -
+      (pressedArrowKeys.current.has('ArrowLeft') ? 1 : 0);
+    const verticalInput =
+      (pressedArrowKeys.current.has('ArrowUp') ? 1 : 0) -
+      (pressedArrowKeys.current.has('ArrowDown') ? 1 : 0);
+
+    if (horizontalInput === 0 && verticalInput === 0) {
+      return;
+    }
+
+    const magnitude = Math.hypot(horizontalInput, verticalInput);
+    const normalizedHorizontal = horizontalInput / magnitude;
+    const normalizedVertical = verticalInput / magnitude;
+
+    if (isPanModifierPressed.current) {
+      const distance = camera.position.distanceTo(controls.target);
+      const step = Math.max(distance * 0.06, CAMERA_PAN_STEP) * delta * 8;
+      const right = new Vector3()
+        .setFromMatrixColumn(camera.matrix, 0)
+        .multiplyScalar(normalizedHorizontal * step);
+      const up = new Vector3(0, 1, 0).multiplyScalar(normalizedVertical * step);
+      const offset = right.add(up);
+
+      camera.position.add(offset);
+      controls.target.add(offset);
+      controls.update();
+      return;
+    }
+
+    controls.setAzimuthalAngle(
+      controls.getAzimuthalAngle() - normalizedHorizontal * CAMERA_ROTATION_STEP,
+    );
+    controls.setPolarAngle(
+      Math.min(
+        controls.maxPolarAngle,
+        Math.max(
+          MIN_POLAR_ANGLE,
+          controls.getPolarAngle() - normalizedVertical * CAMERA_ROTATION_STEP,
+        ),
+      ),
+    );
+    controls.update();
+  });
+
   const renderCar = (texture: Texture) => (
     <>
       <Environment map={texture} />
@@ -308,7 +430,11 @@ function CarScene({ onReady }: Readonly<CarSceneProps>) {
 
   return (
     <>
-      <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
+      <OrbitControls
+        ref={controlsRef}
+        target={[0, 0.35, 0]}
+        maxPolarAngle={1.45}
+      />
       <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
       <color args={[0, 0, 0]} attach='background' />
 

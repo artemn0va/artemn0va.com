@@ -85,6 +85,7 @@ export default function Showcases() {
     <Section className='showcases bg-section shadow-section-inner dark:bg-section-inner-dark dark:shadow-section-inner-dark rounded-xl'>
       <Carousel
         setApi={setApi}
+        enableKeyboardNavigation={false}
         className='select-none'
         opts={{
           loop: true,
@@ -94,7 +95,7 @@ export default function Showcases() {
         <CarouselContent className='!overflow-visible' isShowcasesSection>
           <CarouselItem className='flex items-center justify-center'>
             <GameProvider>
-              <Game2048 />
+              <Game2048 isKeyboardEnabled={selectedSlide === 0} />
             </GameProvider>
           </CarouselItem>
           <CarouselItem className='flex items-center justify-center'>

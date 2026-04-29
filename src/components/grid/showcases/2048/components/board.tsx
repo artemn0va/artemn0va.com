@@ -10,7 +10,13 @@ import { Tile as TileModel } from '@/components/grid/showcases/2048/models/tile'
 import MobileSwiper, { SwipeInput } from './mobile-swiper';
 import Tile from './tile';
 
-export default function Board() {
+interface Props {
+  isKeyboardEnabled?: boolean;
+}
+
+export default function Board({
+  isKeyboardEnabled = true,
+}: Readonly<Props>) {
   const { getTiles, moveTiles, startGame } = useContext(GameContext);
   const initialized = useRef(false);
 
@@ -83,12 +89,16 @@ export default function Board() {
   }, [startGame]);
 
   useEffect(() => {
+    if (!isKeyboardEnabled) {
+      return;
+    }
+
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [handleKeyDown]);
+  }, [handleKeyDown, isKeyboardEnabled]);
 
   return (
     <MobileSwiper onSwipe={handleSwipe}>
