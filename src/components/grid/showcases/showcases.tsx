@@ -108,8 +108,8 @@ export default function Showcases() {
             )}
           </CarouselItem>
         </CarouselContent>
-        <CarouselPrevious className='max-w-max absolute top-[calc(100%-32px)] left-[calc(50%-48px)] 2xl:top-1/2 2xl:left-1.5' />
-        <CarouselNext className='max-w-max absolute top-[calc(100%-32px)] right-[calc(50%-48px)] 2xl:top-1/2 2xl:right-1.5' />
+        <CarouselPrevious className='max-w-max absolute top-[calc(100%-32px)] left-[calc(50%-48px)] focus-visible:ring-0 2xl:top-1/2 2xl:left-1.5' />
+        <CarouselNext className='max-w-max absolute top-[calc(100%-32px)] right-[calc(50%-48px)] focus-visible:ring-0 2xl:top-1/2 2xl:right-1.5' />
       </Carousel>
     </Section>
   );
