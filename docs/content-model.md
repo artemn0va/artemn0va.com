@@ -26,7 +26,7 @@ Primary sections:
 - `Projects`: project section.
 - `Contacts`: contact links and contact dialog.
 - `Portfolio`: portfolio section.
-- `Showcases`: interactive demos such as 2048.
+- `Showcases`: interactive demos such as the car show scene and 2048.
 
 ## Static Data Files
 

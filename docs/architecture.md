@@ -32,6 +32,7 @@ public/
 
 - `/`: assembled in `src/app/page.tsx` from grid sections.
 - `/2048`: page route in `src/app/2048/page.tsx`, with game implementation in `src/components/grid/showcases/2048`.
+- `/car-show`: page route in `src/app/car-show/page.tsx`, with the Three.js scene implementation in `src/components/grid/showcases/car-show`.
 - `/api/hello`: simple API route in `src/app/api/hello/route.ts`.
 
 ## Aliases
@@ -54,4 +55,5 @@ Configured in `tsconfig.json` and Jest:
 - Global base styles live in `src/styles/globals.css`.
 - Home page layout rules live in `src/styles/grid.css`.
 - Feature-level CSS modules live under `src/styles/2048`.
+- Car show model and texture assets are served from `public/car-show`.
 - Tailwind custom backgrounds, shadows, breakpoints, and colors are defined in `tailwind.config.ts`.

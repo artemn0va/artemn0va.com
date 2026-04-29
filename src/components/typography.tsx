@@ -3,11 +3,12 @@ import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 type TextSize = 'xs' | 'sm' | 'base' | 'lg' | 'xl';
+type TextVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'p';
 
 interface Props {
   children: ReactNode;
   className?: string;
-  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'p';
+  variant?: TextVariant;
   size?: TextSize;
   isThemeRevert?: boolean;
 }
@@ -40,13 +41,13 @@ export default function Typography({
       : 'text-[#29303E] dark:text-[#FFF]',
   };
 
-  const ComponentTag = variant as keyof JSX.IntrinsicElements;
+  const ComponentTag = variant;
 
   const textStyle = cn(
     baseStyle,
     `text-${size}`,
     variantStyles[variant],
-    className
+    className,
   );
 
   return <ComponentTag className={textStyle}>{children}</ComponentTag>;
