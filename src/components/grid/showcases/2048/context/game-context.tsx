@@ -14,9 +14,7 @@ import {
   tileCountPerDimension,
 } from '@/components/grid/showcases/2048/constants';
 import { Tile } from '@/components/grid/showcases/2048/models/tile';
-import gameReducer, {
-  initialState,
-} from '@/components/grid/showcases/2048/reducers/game-reducer';
+import gameReducer, { initialState } from '@/components/grid/showcases/2048/reducers/game-reducer';
 
 type MoveDirection = 'move_up' | 'move_down' | 'move_left' | 'move_right';
 
@@ -37,7 +35,7 @@ export default function GameProvider({
 }: Readonly<PropsWithChildren>) {
   const [gameState, dispatch] = useReducer(gameReducer, initialState);
 
-  const getEmptyCells = () => {
+  const getEmptyCells = useCallback(() => {
     const results: [number, number][] = [];
 
     for (let x = 0; x < tileCountPerDimension; x++) {
@@ -48,10 +46,11 @@ export default function GameProvider({
       }
     }
     return results;
-  };
+  }, [gameState.board]);
 
-  const appendRandomTile = () => {
+  const appendRandomTile = useCallback(() => {
     const emptyCells = getEmptyCells();
+
     if (emptyCells.length > 0) {
       const cellIndex = Math.floor(Math.random() * emptyCells.length);
       const newTile = {
@@ -60,13 +59,13 @@ export default function GameProvider({
       };
       dispatch({ type: 'create_tile', tile: newTile });
     }
-  };
+  }, [getEmptyCells]);
 
-  const getTiles = () => {
+  const getTiles = useCallback(() => {
     return gameState.tilesByIds
       .map((tileId) => gameState.tiles[tileId])
       .filter((tile): tile is Tile => !isNil(tile));
-  };
+  }, [gameState.tiles, gameState.tilesByIds]);
 
   const moveTiles = useCallback(
     throttle(
@@ -77,19 +76,25 @@ export default function GameProvider({
     [dispatch],
   );
 
-  const startGame = () => {
+  const startGame = useCallback(() => {
     dispatch({ type: 'create_tile', tile: { position: [0, 1], value: 2 } });
     dispatch({ type: 'create_tile', tile: { position: [0, 2], value: 2 } });
-  };
+  }, []);
 
   useEffect(() => {
-    if (gameState.hasChanged) {
-      setTimeout(() => {
-        dispatch({ type: 'clean_up' });
-        appendRandomTile();
-      }, mergeAnimationDuration);
+    if (!gameState.hasChanged) {
+      return;
     }
-  }, [gameState.hasChanged]);
+
+    const timeoutId = window.setTimeout(() => {
+      dispatch({ type: 'clean_up' });
+      appendRandomTile();
+    }, mergeAnimationDuration);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [appendRandomTile, gameState.hasChanged]);
 
   return (
     <GameContext.Provider

@@ -1,15 +1,18 @@
 import Board from '@/components/grid/showcases/2048/components/board';
+import { Tile as TileModel } from '@/components/grid/showcases/2048/models/tile';
 import Score from '@/components/grid/showcases/2048/components/score';
 import { cn } from '@/lib/utils';
 
 interface Props {
   isFullscreen?: boolean;
   isKeyboardEnabled?: boolean;
+  tilesOverride?: TileModel[];
 }
 
 export default function Game2048({
   isFullscreen = false,
   isKeyboardEnabled = true,
+  tilesOverride,
 }: Readonly<Props>) {
   return (
     <div
@@ -37,6 +40,7 @@ export default function Game2048({
         <Board
           isKeyboardEnabled={isKeyboardEnabled}
           sizeVariant={isFullscreen ? 'expanded' : 'default'}
+          tilesOverride={tilesOverride}
         />
       </main>
 

@@ -11,6 +11,7 @@ import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber';
 import {
   type ComponentType,
   type ElementRef,
+  type RefObject,
   type ReactNode,
   Suspense,
   useEffect,
@@ -50,6 +51,10 @@ interface Props {
 interface CarSceneProps {
   onReady: () => void;
   isInputEnabled: boolean;
+}
+
+interface SceneReadyMarkerProps {
+  onReady: () => void;
 }
 
 const CAMERA_ROTATION_STEP = 0.08;
@@ -307,7 +312,7 @@ function Rings() {
   );
 }
 
-function SceneReadyMarker({ onReady }: Readonly<CarSceneProps>) {
+function SceneReadyMarker({ onReady }: Readonly<SceneReadyMarkerProps>) {
   useEffect(() => {
     const frame = requestAnimationFrame(onReady);
 
@@ -490,19 +495,84 @@ function WebGLContextCleanup() {
   return null;
 }
 
+interface CanvasLayoutSyncProps {
+  containerRef: RefObject<HTMLDivElement>;
+}
+
+function CanvasLayoutSync({ containerRef }: Readonly<CanvasLayoutSyncProps>) {
+  const setSize = useThree((state) => state.setSize);
+  const invalidate = useThree((state) => state.invalidate);
+
+  useEffect(() => {
+    const container = containerRef.current;
+
+    if (!container) {
+      return;
+    }
+
+    let frameId = 0;
+
+    const syncCanvasSize = () => {
+      const { width, height } = container.getBoundingClientRect();
+
+      if (width === 0 || height === 0) {
+        return;
+      }
+
+      setSize(width, height);
+      invalidate();
+    };
+
+    const syncAcrossFrames = (framesRemaining = 12) => {
+      syncCanvasSize();
+
+      if (framesRemaining <= 1) {
+        return;
+      }
+
+      frameId = requestAnimationFrame(() => {
+        syncAcrossFrames(framesRemaining - 1);
+      });
+    };
+
+    syncAcrossFrames();
+
+    const resizeObserver = new ResizeObserver(() => {
+      syncCanvasSize();
+    });
+
+    resizeObserver.observe(container);
+    container.addEventListener('transitionend', syncCanvasSize);
+    container.addEventListener('animationend', syncCanvasSize);
+    window.addEventListener('resize', syncCanvasSize);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      resizeObserver.disconnect();
+      container.removeEventListener('transitionend', syncCanvasSize);
+      container.removeEventListener('animationend', syncCanvasSize);
+      window.removeEventListener('resize', syncCanvasSize);
+    };
+  }, [containerRef, invalidate, setSize]);
+
+  return null;
+}
+
 export default function CarShow({
   isFullscreen = false,
   isInputEnabled = true,
 }: Readonly<Props>) {
   const [isSceneReady, setIsSceneReady] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
     <div
+      ref={containerRef}
       className={cn(
         'relative w-full overflow-hidden bg-black',
         isFullscreen
-          ? 'h-[min(78vh,720px)] rounded-[28px]'
-          : 'h-[300px] rounded-xl md:h-[320px] 2xl:h-full 2xl:min-h-[220px]',
+          ? 'aspect-video w-[min(calc(100vw-48px),1100px)] max-w-full rounded-[28px]'
+          : 'aspect-video rounded-xl',
       )}
     >
       {!isSceneReady && (
@@ -510,7 +580,8 @@ export default function CarShow({
           <CarShowLoader />
         </div>
       )}
-      <Canvas shadows>
+      <Canvas className='h-full w-full' shadows>
+        <CanvasLayoutSync containerRef={containerRef} />
         <WebGLContextCleanup />
         <Suspense fallback={null}>
           <CarScene

@@ -19,6 +19,7 @@ import Tile from './tile';
 interface Props {
   isKeyboardEnabled?: boolean;
   sizeVariant?: 'default' | 'expanded';
+  tilesOverride?: TileModel[];
 }
 
 const EXPANDED_BOARD_SIZE = 420;
@@ -26,6 +27,7 @@ const EXPANDED_BOARD_SIZE = 420;
 export default function Board({
   isKeyboardEnabled = true,
   sizeVariant = 'default',
+  tilesOverride,
 }: Readonly<Props>) {
   const { getTiles, isGameStarted, moveTiles, startGame } =
     useContext(GameContext);
@@ -97,7 +99,9 @@ export default function Board({
   };
 
   const renderTiles = () => {
-    return getTiles().map((tile: TileModel) => (
+    const tiles = tilesOverride ?? getTiles();
+
+    return tiles.map((tile: TileModel) => (
       <Tile
         key={`${tile.id}`}
         {...tile}
