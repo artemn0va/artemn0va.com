@@ -214,7 +214,7 @@ function ProjectTechnologies({
           return (
             <li
               key={`${technology.skillId}-${technology.label}`}
-              className='flex h-8 w-max rounded-xl p-px shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87] dark:w-[94px] dark:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59]'
+              className='flex h-8 max-w-max rounded-xl p-px shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87] dark:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59]'
             >
               <div className='flex h-full w-full items-center justify-center gap-1 rounded-[11px] bg-[linear-gradient(134.17deg,#EEF0F5_4.98%,#E6E9EF_94.88%)] px-3 py-1.5 dark:bg-[linear-gradient(134.17deg,#3F4850_4.98%,#363E46_94.88%)]'>
                 <NextImage
@@ -223,6 +223,7 @@ function ProjectTechnologies({
                   alt=''
                   width={19}
                   height={19}
+                  unoptimized
                 />
                 <Typography
                   size='sm'
