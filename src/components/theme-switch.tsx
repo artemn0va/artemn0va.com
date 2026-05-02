@@ -1,8 +1,7 @@
 'use client';
-// NOTE: Guide to create a theme switcher component: https://dev.to/danhawkins/a-simple-theme-switcher-in-react-for-tailwind-css-1349
 
 import { useEffect, useState } from 'react';
-import { useIsClient, useLocalStorage } from 'usehooks-ts';
+import { useTheme } from 'next-themes';
 
 import { cn } from '@/lib/utils';
 
@@ -13,31 +12,23 @@ interface Props {
 }
 
 export default function ThemeSwitch({ className }: Readonly<Props>) {
-  const [theme, setTheme] = useLocalStorage('theme', 'light');
-  const [isLightMode, setIsLightMode] = useState(theme == 'light');
-  const isClient = useIsClient();
+  const [isMounted, setIsMounted] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
 
   useEffect(() => {
-    const htmlSelector = document.querySelector('html');
-    if (htmlSelector) {
-      htmlSelector.classList.remove('light', 'dark');
-      htmlSelector.classList.add(theme);
-    }
-  }, [theme]);
+    setIsMounted(true);
+  }, []);
 
-  const handleThemeChange = (isLightThemeActive: boolean) => {
-    setTheme(isLightThemeActive ? 'light' : 'dark');
-    setIsLightMode(isLightThemeActive);
-  };
+  const isLightMode = resolvedTheme !== 'dark';
 
   return (
     <div
       className={cn(
         'bg-section shadow-theme-switch dark:bg-theme-switch-dark dark:shadow-theme-switch-dark flex justify-center items-center gap-x-3 px-3 py-[9px] rounded-full',
-        className
+        className,
       )}
     >
-      {isClient && (
+      {isMounted && (
         <>
           <Button
             variant='dot'
@@ -46,10 +37,11 @@ export default function ThemeSwitch({ className }: Readonly<Props>) {
               {
                 'w-[32px] shadow-theme-switch-active dark:shadow-theme-switch-active-dark':
                   isLightMode,
-              }
+              },
             )}
             aria-label='Toggle light mode'
-            onClick={() => handleThemeChange(true)}
+            aria-pressed={isLightMode}
+            onClick={() => setTheme('light')}
           />
           <Button
             variant='dot'
@@ -58,10 +50,11 @@ export default function ThemeSwitch({ className }: Readonly<Props>) {
               {
                 'w-[32px] shadow-theme-switch-active dark:shadow-theme-switch-active-dark':
                   !isLightMode,
-              }
+              },
             )}
             aria-label='Toggle dark mode'
-            onClick={() => handleThemeChange(false)}
+            aria-pressed={!isLightMode}
+            onClick={() => setTheme('dark')}
           />
         </>
       )}

@@ -8,6 +8,7 @@ import '@/styles/grid.css';
 
 import { cn } from '@/lib/utils';
 
+import ThemeProvider from '@/components/theme-provider';
 import { Toaster } from '@/components/ui/toaster';
 
 import { siteConfig } from '@/constant/config';
@@ -61,16 +62,17 @@ interface Props {
 
 export default function RootLayout({ children }: Readonly<Props>) {
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <body
-        suppressHydrationWarning
         className={cn(
           'min-h-screen bg-page dark:bg-page-dark font-sans antialiased',
           fontSans.variable,
         )}
       >
-        <main>{children}</main>
-        <Toaster />
+        <ThemeProvider>
+          <main>{children}</main>
+          <Toaster />
+        </ThemeProvider>
       </body>
     </html>
   );
