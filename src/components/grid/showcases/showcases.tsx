@@ -14,6 +14,7 @@ import {
 import Game2048 from '@/components/grid/showcases/2048/components/2048';
 import GameProvider from '@/components/grid/showcases/2048/context/game-context';
 import CarShowLoader from '@/components/grid/showcases/car-show/car-show-loader';
+import Typography from '@/components/typography';
 import Section from '@/layouts/section';
 
 const CarShow = dynamic(
@@ -23,6 +24,8 @@ const CarShow = dynamic(
     loading: () => <CarShowLoader />,
   },
 );
+
+const showcaseTitles = ['2048', '3D'] as const;
 
 function CarShowPlaceholder() {
   return (
@@ -82,7 +85,12 @@ export default function Showcases() {
   }, [api]);
 
   return (
-    <Section className='showcases bg-section shadow-section-inner dark:bg-section-inner-dark dark:shadow-section-inner-dark rounded-xl'>
+    <Section className='showcases bg-section shadow-section-inner dark:bg-section-inner-dark dark:shadow-section-inner-dark relative rounded-xl'>
+      <div className='pointer-events-none absolute top-3.5 left-5 z-20'>
+        <Typography isThemeRevert variant='h2' size='sm'>
+          {showcaseTitles[selectedSlide] ?? showcaseTitles[0]}
+        </Typography>
+      </div>
       <Carousel
         setApi={setApi}
         enableKeyboardNavigation={false}
