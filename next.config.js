@@ -10,6 +10,10 @@ const nextConfig = {
         hostname: 'skillicons.dev',
         protocol: 'https',
       },
+      {
+        hostname: 'refframe-spaces.nyc3.cdn.digitaloceanspaces.com',
+        protocol: 'https',
+      },
     ],
   },
 

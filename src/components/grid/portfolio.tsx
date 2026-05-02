@@ -20,15 +20,11 @@ import Section from '@/layouts/section';
 const imageSizes = '(min-width: 1440px) 306px, (min-width: 768px) 622px, 238px';
 const imageQuality = 80;
 const imageFrameClassName = 'relative h-full w-full overflow-hidden';
-const imageBackgroundClassName =
-  'absolute inset-0 h-full w-full scale-110 object-cover blur-xl brightness-95 saturate-125 dark:brightness-75';
 const imageForegroundClassName =
-  'relative h-full w-full object-contain drop-shadow-[0_12px_24px_rgba(35,40,45,0.22)]';
+  'portfolio-slide-image object-cover object-top drop-shadow-[0_12px_24px_rgba(35,40,45,0.22)]';
 
 type PortfolioSlide = {
   alt: string;
-  width: number;
-  height: number;
 } & (
   | {
       src: string;
@@ -39,8 +35,6 @@ type PortfolioSlide = {
       themeSrc: {
         light: string;
         dark: string;
-        darkWidth: number;
-        darkHeight: number;
       };
     }
 );
@@ -48,103 +42,58 @@ type PortfolioSlide = {
 const portfolioSlides: PortfolioSlide[] = [
   {
     alt: 'Refframe interface',
-    width: 2550,
-    height: 1397,
     themeSrc: {
-      light: '/images/swiper/refframe-light.webp',
-      dark: '/images/swiper/refframe-dark.webp',
-      darkWidth: 1920,
-      darkHeight: 1192,
+      light:
+        'https://refframe-spaces.nyc3.cdn.digitaloceanspaces.com/artemn0va/swiper/refframe-light.webp',
+      dark:
+        'https://refframe-spaces.nyc3.cdn.digitaloceanspaces.com/artemn0va/swiper/refframe-dark.webp',
     },
   },
   {
     alt: 'Refframe landing page',
-    src: '/images/swiper/refframe-landing.webp',
-    width: 2543,
-    height: 1396,
+    src: 'https://refframe-spaces.nyc3.cdn.digitaloceanspaces.com/artemn0va/swiper/refframe-landing.webp',
   },
   {
     alt: 'Widegamut interface',
-    src: '/images/swiper/widegamut.webp',
-    width: 1920,
-    height: 1080,
+    src: 'https://refframe-spaces.nyc3.cdn.digitaloceanspaces.com/artemn0va/swiper/widegamut.webp',
   },
   {
     alt: 'Widegamut landing page',
-    src: '/images/swiper/widegamut-landing.webp',
-    width: 2550,
-    height: 1394,
+    src: 'https://refframe-spaces.nyc3.cdn.digitaloceanspaces.com/artemn0va/swiper/widegamut-landing.webp',
   },
   {
     alt: 'MDB interface',
-    src: '/images/swiper/mdb.webp',
-    width: 2540,
-    height: 1383,
+    src: 'https://refframe-spaces.nyc3.cdn.digitaloceanspaces.com/artemn0va/swiper/mdb.webp',
   },
   {
     alt: 'Nadia website',
-    src: '/images/swiper/nadia.webp',
-    width: 2543,
-    height: 1397,
+    src: 'https://refframe-spaces.nyc3.cdn.digitaloceanspaces.com/artemn0va/swiper/nadia.jpg',
   },
   {
     alt: 'Ultracube website',
-    src: '/images/swiper/ultracube.webp',
-    width: 2553,
-    height: 1394,
+    src: 'https://refframe-spaces.nyc3.cdn.digitaloceanspaces.com/artemn0va/swiper/ultracube.webp',
   },
   {
     alt: 'Artboxshop website',
-    src: '/images/swiper/artboxshop.webp',
-    width: 2540,
-    height: 1402,
+    src: 'https://refframe-spaces.nyc3.cdn.digitaloceanspaces.com/artemn0va/swiper/artboxshop.webp',
   },
 ];
 
-function PortfolioSlideImage({
-  slide,
-  showBackground,
-}: Readonly<{ slide: PortfolioSlide; showBackground: boolean }>) {
+function PortfolioSlideImage({ slide }: Readonly<{ slide: PortfolioSlide }>) {
   return slide.themeSrc ? (
     <div className={imageFrameClassName}>
-      {showBackground && (
-        <>
-          <Image
-            src={slide.themeSrc.light}
-            alt=''
-            width={slide.width}
-            height={slide.height}
-            sizes={imageSizes}
-            quality={imageQuality}
-            className={cn(imageBackgroundClassName, 'dark:hidden')}
-            aria-hidden='true'
-          />
-          <Image
-            src={slide.themeSrc.dark}
-            alt=''
-            width={slide.themeSrc.darkWidth}
-            height={slide.themeSrc.darkHeight}
-            sizes={imageSizes}
-            quality={imageQuality}
-            className={cn(imageBackgroundClassName, 'hidden dark:block')}
-            aria-hidden='true'
-          />
-        </>
-      )}
       <Image
+        fill
         src={slide.themeSrc.light}
         alt={slide.alt}
-        width={slide.width}
-        height={slide.height}
         sizes={imageSizes}
         quality={imageQuality}
         className={cn(imageForegroundClassName, 'dark:hidden')}
       />
       <Image
+        fill
         src={slide.themeSrc.dark}
         alt={slide.alt}
-        width={slide.themeSrc.darkWidth}
-        height={slide.themeSrc.darkHeight}
         sizes={imageSizes}
         quality={imageQuality}
         className={cn(imageForegroundClassName, 'hidden dark:block')}
@@ -152,23 +101,10 @@ function PortfolioSlideImage({
     </div>
   ) : (
     <div className={imageFrameClassName}>
-      {showBackground && (
-        <Image
-          src={slide.src}
-          alt=''
-          width={slide.width}
-          height={slide.height}
-          sizes={imageSizes}
-          quality={imageQuality}
-          className={imageBackgroundClassName}
-          aria-hidden='true'
-        />
-      )}
       <Image
+        fill
         src={slide.src}
         alt={slide.alt}
-        width={slide.width}
-        height={slide.height}
         sizes={imageSizes}
         quality={imageQuality}
         className={imageForegroundClassName}
@@ -181,13 +117,6 @@ export default function Portfolio() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(1);
   const previousPreviewSlide = portfolioSlides[portfolioSlides.length - 1];
-
-  const shouldShowSlideBackground = (index: number) => {
-    const slideNumber = index + 1;
-    const distance = Math.abs(current - slideNumber);
-
-    return distance <= 1 || distance === portfolioSlides.length - 1;
-  };
 
   useEffect(() => {
     if (!api) {
@@ -223,10 +152,7 @@ export default function Portfolio() {
               className='pointer-events-none absolute left-[calc((100%_-_238px)/2_-_238px)] top-4 z-0 h-[238px] w-[238px] scale-[.828] overflow-hidden bg-page shadow-section-outer dark:bg-section-dark dark:shadow-section-outer-dark md:left-[calc((100%_-_622px)/2_-_622px)] md:h-[622px] md:w-[622px] md:scale-[.9] 2xl:left-[calc((100%_-_306px)/2_-_306px)] 2xl:h-[306px] 2xl:w-[306px] 2xl:scale-[.88]'
             >
               <CardContent className='flex aspect-square items-center justify-center p-0'>
-                <PortfolioSlideImage
-                  slide={previousPreviewSlide}
-                  showBackground
-                />
+                <PortfolioSlideImage slide={previousPreviewSlide} />
               </CardContent>
             </Card>
           )}
@@ -244,10 +170,7 @@ export default function Portfolio() {
                     )}
                   >
                     <CardContent className='flex aspect-square items-center justify-center p-0'>
-                      <PortfolioSlideImage
-                        slide={slide}
-                        showBackground={shouldShowSlideBackground(index)}
-                      />
+                      <PortfolioSlideImage slide={slide} />
                     </CardContent>
                   </Card>
                 </CarouselItem>
