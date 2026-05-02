@@ -44,10 +44,12 @@ const TypedCubeCamera = CubeCamera as unknown as ComponentType<{
 
 interface Props {
   isFullscreen?: boolean;
+  isInputEnabled?: boolean;
 }
 
 interface CarSceneProps {
   onReady: () => void;
+  isInputEnabled: boolean;
 }
 
 const CAMERA_ROTATION_STEP = 0.08;
@@ -317,13 +319,17 @@ function SceneReadyMarker({ onReady }: Readonly<CarSceneProps>) {
   return null;
 }
 
-function CarScene({ onReady }: Readonly<CarSceneProps>) {
+function CarScene({ onReady, isInputEnabled }: Readonly<CarSceneProps>) {
   const controlsRef = useRef<ElementRef<typeof OrbitControls> | null>(null);
   const isPanModifierPressed = useRef(false);
   const pressedArrowKeys = useRef<Set<string>>(new Set());
   const camera = useThree((state) => state.camera);
 
   useEffect(() => {
+    if (!isInputEnabled) {
+      return;
+    }
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (isEditableTarget(event.target)) {
         return;
@@ -367,7 +373,7 @@ function CarScene({ onReady }: Readonly<CarSceneProps>) {
       window.removeEventListener('keyup', handleKeyUp);
       window.removeEventListener('blur', handleWindowBlur);
     };
-  }, []);
+  }, [isInputEnabled]);
 
   useFrame((_state, delta) => {
     const controls = controlsRef.current;
@@ -407,7 +413,8 @@ function CarScene({ onReady }: Readonly<CarSceneProps>) {
     }
 
     controls.setAzimuthalAngle(
-      controls.getAzimuthalAngle() - normalizedHorizontal * CAMERA_ROTATION_STEP,
+      controls.getAzimuthalAngle() -
+        normalizedHorizontal * CAMERA_ROTATION_STEP,
     );
     controls.setPolarAngle(
       Math.min(
@@ -483,7 +490,10 @@ function WebGLContextCleanup() {
   return null;
 }
 
-export default function CarShow({ isFullscreen = false }: Readonly<Props>) {
+export default function CarShow({
+  isFullscreen = false,
+  isInputEnabled = true,
+}: Readonly<Props>) {
   const [isSceneReady, setIsSceneReady] = useState(false);
 
   return (
@@ -491,7 +501,7 @@ export default function CarShow({ isFullscreen = false }: Readonly<Props>) {
       className={cn(
         'relative w-full overflow-hidden bg-black',
         isFullscreen
-          ? 'h-screen'
+          ? 'h-[min(78vh,720px)] rounded-[28px]'
           : 'h-[300px] rounded-xl md:h-[320px] 2xl:h-full 2xl:min-h-[220px]',
       )}
     >
@@ -503,7 +513,10 @@ export default function CarShow({ isFullscreen = false }: Readonly<Props>) {
       <Canvas shadows>
         <WebGLContextCleanup />
         <Suspense fallback={null}>
-          <CarScene onReady={() => setIsSceneReady(true)} />
+          <CarScene
+            onReady={() => setIsSceneReady(true)}
+            isInputEnabled={isInputEnabled}
+          />
         </Suspense>
       </Canvas>
     </div>

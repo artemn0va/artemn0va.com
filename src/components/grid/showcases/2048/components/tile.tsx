@@ -15,14 +15,26 @@ import {
 } from '@/components/grid/showcases/2048/constants';
 import { Tile as TileProps } from '@/components/grid/showcases/2048/models/tile';
 
-export default function Tile({ position, value }: Readonly<TileProps>) {
+interface Props extends TileProps {
+  containerWidthOverride?: number;
+  sizeVariant?: 'default' | 'expanded';
+}
+
+export default function Tile({
+  position,
+  value,
+  containerWidthOverride,
+  sizeVariant = 'default',
+}: Readonly<Props>) {
   const isTabletScreen = useMediaQuery({ minWidth: 768, maxWidth: 1440 });
   const isDesktopScreen = useMediaQuery({ minWidth: 1440 });
-  const containerWidth = isTabletScreen
-    ? containerWidthTablet
-    : isDesktopScreen
-    ? containerWidthDesktop
-    : containerWidthMobile;
+  const containerWidth =
+    containerWidthOverride ??
+    (isTabletScreen
+      ? containerWidthTablet
+      : isDesktopScreen
+        ? containerWidthDesktop
+        : containerWidthMobile);
 
   const [scale, setScale] = useState(1);
   const previousValue = usePreviousProps<number>(value);
@@ -50,7 +62,8 @@ export default function Tile({ position, value }: Readonly<TileProps>) {
       className={cn(
         'shadow-2048-cell dark:shadow-2048-cell-dark',
         styles.tile,
-        styles[`tile${value}`]
+        styles[`tile${value}`],
+        sizeVariant === 'expanded' && styles.tileExpanded,
       )}
       style={style}
     >

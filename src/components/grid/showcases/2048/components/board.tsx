@@ -1,6 +1,12 @@
 'use client';
 
-import { useCallback, useContext, useEffect, useRef } from 'react';
+import {
+  type CSSProperties,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+} from 'react';
 
 import styles from '@/styles/2048/board.module.css';
 
@@ -12,13 +18,28 @@ import Tile from './tile';
 
 interface Props {
   isKeyboardEnabled?: boolean;
+  sizeVariant?: 'default' | 'expanded';
 }
+
+const EXPANDED_BOARD_SIZE = 420;
 
 export default function Board({
   isKeyboardEnabled = true,
+  sizeVariant = 'default',
 }: Readonly<Props>) {
-  const { getTiles, moveTiles, startGame } = useContext(GameContext);
+  const { getTiles, isGameStarted, moveTiles, startGame } =
+    useContext(GameContext);
   const initialized = useRef(false);
+  const expandedBoardStyle =
+    sizeVariant === 'expanded'
+      ? ({
+          '--board-size': `${EXPANDED_BOARD_SIZE}px`,
+          '--cell-size': '93px',
+          '--tile-radius': '22px',
+          '--tile-font-size': '34px',
+          '--tile-line-height': '1.15',
+        } as CSSProperties)
+      : undefined;
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -77,16 +98,23 @@ export default function Board({
 
   const renderTiles = () => {
     return getTiles().map((tile: TileModel) => (
-      <Tile key={`${tile.id}`} {...tile} />
+      <Tile
+        key={`${tile.id}`}
+        {...tile}
+        containerWidthOverride={
+          sizeVariant === 'expanded' ? EXPANDED_BOARD_SIZE : undefined
+        }
+        sizeVariant={sizeVariant}
+      />
     ));
   };
 
   useEffect(() => {
-    if (initialized.current === false) {
+    if (initialized.current === false && !isGameStarted) {
       startGame();
       initialized.current = true;
     }
-  }, [startGame]);
+  }, [isGameStarted, startGame]);
 
   useEffect(() => {
     if (!isKeyboardEnabled) {
@@ -102,7 +130,11 @@ export default function Board({
 
   return (
     <MobileSwiper onSwipe={handleSwipe}>
-      <div className={styles.board}>
+      <div
+        className={styles.board}
+        data-size-variant={sizeVariant}
+        style={expandedBoardStyle}
+      >
         <div className={styles.tiles}>{renderTiles()}</div>
         <div className={styles.grid}>{renderGrid()}</div>
       </div>

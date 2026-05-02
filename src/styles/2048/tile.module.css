@@ -1,15 +1,18 @@
 .tile {
+  --tile-radius: 16px;
+  --tile-font-size: 26px;
+  --tile-line-height: 1.15;
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 66px;
-  height: 66px;
-  border-radius: 16px;
+  width: calc(var(--cell-size, 66px));
+  height: calc(var(--cell-size, 66px));
+  border-radius: var(--tile-radius);
   background: var(--tile-background);
   color: var(--secondary-text-color);
-  font-size: 26px;
-  line-height: 1.15;
+  font-size: var(--tile-font-size);
+  line-height: var(--tile-line-height);
   font-weight: 500;
   transition-property: left, top, transform;
   transition-duration: 200ms, 200ms, 100ms;
@@ -17,20 +20,22 @@
 
 @media (min-width: 768px) {
   .tile {
-    width: 70px;
-    height: 70px;
-    font-size: 26px;
-    line-height: 1.27;
+    --tile-font-size: 26px;
+    --tile-line-height: 1.27;
   }
 }
 
 @media (min-width: 1440px) {
   .tile {
-    width: 55px;
-    height: 55px;
-    font-size: 22px;
-    line-height: 1.27;
+    --tile-font-size: 22px;
+    --tile-line-height: 1.27;
   }
+}
+
+.tileExpanded {
+  --tile-radius: 22px;
+  --tile-font-size: 34px;
+  --tile-line-height: 1.15;
 }
 
 /* -=-=-=- START OF TEXT COLOR -=-=-=- */

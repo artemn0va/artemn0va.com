@@ -22,6 +22,7 @@ type MoveDirection = 'move_up' | 'move_down' | 'move_left' | 'move_right';
 
 export const GameContext = createContext({
   score: 0,
+  isGameStarted: false,
   moveTiles: (direction: MoveDirection) => {
     console.warn('moveTiles function is not implemented', direction);
   },
@@ -71,9 +72,9 @@ export default function GameProvider({
     throttle(
       (type: MoveDirection) => dispatch({ type }),
       mergeAnimationDuration * 1.05,
-      { trailing: false }
+      { trailing: false },
     ),
-    [dispatch]
+    [dispatch],
   );
 
   const startGame = () => {
@@ -94,6 +95,7 @@ export default function GameProvider({
     <GameContext.Provider
       value={{
         score: gameState.score,
+        isGameStarted: gameState.tilesByIds.length > 0,
         getTiles,
         moveTiles,
         startGame,
