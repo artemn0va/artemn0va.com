@@ -1,6 +1,6 @@
 import ContactLinks from '@/components/grid/contacts/contact-links';
-import contactsData from '@/components/grid/contacts/contacts-data';
 import Typography from '@/components/typography';
+import contactsData from '@/content/home/contacts';
 
 import Section from '@/layouts/section';
 

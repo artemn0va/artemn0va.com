@@ -1,4 +1,6 @@
-const educationData = [
+import type { TimelineItem } from '@/content/home/types';
+
+const educationData: TimelineItem[] = [
   {
     id: 'self-taught',
     date: '2022 - 2023',

@@ -1,4 +1,3 @@
-import skillsData from '@/components/grid/skills/skills-data';
 import NextImage from '@/components/next-image';
 import Typography from '@/components/typography';
 import {
@@ -8,6 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import skillsData from '@/content/home/skills';
 
 import Section from '@/layouts/section';
 

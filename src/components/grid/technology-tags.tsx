@@ -1,14 +1,10 @@
 'use client';
 
-import skillsData from '@/components/grid/skills/skills-data';
 import NextImage from '@/components/next-image';
 import Typography from '@/components/typography';
+import skillsData from '@/content/home/skills';
+import type { TechnologyTag } from '@/content/home/types';
 import { cn } from '@/lib/utils';
-
-export type TechnologyTag = {
-  skillId: string;
-  label: string;
-};
 
 type TechnologyTagsProps = {
   technologies: TechnologyTag[];

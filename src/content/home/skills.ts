@@ -1,4 +1,6 @@
-const skillsData = [
+import type { SkillItem } from '@/content/home/types';
+
+const skillsData: SkillItem[] = [
   {
     id: 'js',
     src: 'https://skillicons.dev/icons?i=js',

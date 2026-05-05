@@ -1,5 +1,3 @@
-import educationData from '@/components/grid/experience/education-data';
-import experienceData from '@/components/grid/experience/experience-data';
 import TechnologyTags from '@/components/grid/technology-tags';
 import Typography from '@/components/typography';
 import {
@@ -10,6 +8,9 @@ import {
 } from '@/components/ui/accordion';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import educationData from '@/content/home/education';
+import experienceData from '@/content/home/experience';
+import type { TimelineItem } from '@/content/home/types';
 
 import Section from '@/layouts/section';
 
@@ -78,14 +79,7 @@ export const TabsComponent: React.FC<TabsProps> = ({ defaultValue, items }) => {
 };
 
 type AccordionProps = {
-  items: {
-    id: string;
-    date: string;
-    title: string;
-    subtitle: string;
-    achievements: Array<{ text: string }>;
-    technologies?: Array<{ skillId: string; label: string }>;
-  }[];
+  items: TimelineItem[];
 };
 
 export const AccordionComponent: React.FC<AccordionProps> = ({ items }) => {

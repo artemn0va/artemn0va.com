@@ -25,7 +25,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/components/ui/use-toast';
 import ContactLinks from '@/components/grid/contacts/contact-links';
-import contactsData from '@/components/grid/contacts/contacts-data';
+import contactsData from '@/content/home/contacts';
 
 const FormSchema = z.object({
   email: z.string().email({

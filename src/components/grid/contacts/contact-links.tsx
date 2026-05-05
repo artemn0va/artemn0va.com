@@ -1,11 +1,15 @@
 import Link from 'next/link';
-import { ReactNode } from 'react';
 
-import { Contact } from '@/components/grid/contacts/contacts-data';
+import type { ContactIconId, ContactItem } from '@/content/home/types';
 import { cn } from '@/lib/utils';
 
+import EmailIcon from '~/svg/email.svg';
+import GitHubIcon from '~/svg/github.svg';
+import LinkedInIcon from '~/svg/linkedin.svg';
+import WhatsAppIcon from '~/svg/whatsapp.svg';
+
 interface ContactLinksProps {
-  contacts: Contact[];
+  contacts: ContactItem[];
   isDialog?: boolean;
 }
 
@@ -23,7 +27,7 @@ export default function ContactLinks({
         <li key={index}>
           <ContactLink
             url={contact.url}
-            icon={contact.icon}
+            iconId={contact.iconId}
             label={contact.label}
           />
         </li>
@@ -34,11 +38,24 @@ export default function ContactLinks({
 
 interface ContactLinkProps {
   url: string;
-  icon: ReactNode;
+  iconId: ContactIconId;
   label: string;
 }
 
-function ContactLink({ url, icon, label }: Readonly<ContactLinkProps>) {
+function getContactIcon(iconId: ContactIconId) {
+  switch (iconId) {
+    case 'github':
+      return <GitHubIcon className='w-[28px] h-[28px]' />;
+    case 'linkedin':
+      return <LinkedInIcon className='w-[22.75px] h-[22.75px]' />;
+    case 'whatsapp':
+      return <WhatsAppIcon className='w-[24px] h-[24px]' />;
+    case 'email':
+      return <EmailIcon className='w-[28px] h-[28px]' />;
+  }
+}
+
+function ContactLink({ url, iconId, label }: Readonly<ContactLinkProps>) {
   return (
     <Link
       href={url}
@@ -47,7 +64,7 @@ function ContactLink({ url, icon, label }: Readonly<ContactLinkProps>) {
       className='bg-btn-outer-dark shadow-contacts-btn-outer-dark dark:bg-btn-outer dark:shadow-contacts-btn-outer p-1.5 rounded-full flex'
     >
       <div className='w-[46px] h-[46px] bg-btn-inner-dark shadow-contacts-btn-inner-dark dark:bg-page dark:shadow-contacts-btn-inner rounded-full flex justify-center items-center'>
-        {icon}
+        {getContactIcon(iconId)}
       </div>
     </Link>
   );

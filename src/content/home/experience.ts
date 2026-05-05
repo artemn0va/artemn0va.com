@@ -1,4 +1,6 @@
-const experienceData = [
+import type { TimelineItem } from '@/content/home/types';
+
+const experienceData: TimelineItem[] = [
   {
     id: 'yoobic',
     date: '2024 - 2026',

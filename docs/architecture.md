@@ -16,6 +16,7 @@ src/
   components/                  Reusable components and portfolio grid sections
   components/grid/             Home page CV/portfolio sections
   components/grid/showcases/   Interactive showcases, including 2048
+  content/                     Manually editable portfolio and CV content
   constant/                    Site and environment constants
   layouts/                     Shared layout wrappers
   lib/                         Utilities, env validation, logger, OG helpers
@@ -45,7 +46,7 @@ Configured in `tsconfig.json` and Jest:
 
 ## Data Flow
 
-- Portfolio sections are mostly static React components backed by colocated data files.
+- Portfolio sections are mostly static React components backed by `src/content/home/*` data files.
 - Site metadata uses `siteConfig` from `src/constant/config.ts` and is applied in `src/app/layout.tsx`.
 - Environment validation is centralized in `src/lib/env.ts` and imported by the home page.
 - The 2048 feature uses a reducer, context provider, hooks, and model classes under `src/components/grid/showcases/2048`.

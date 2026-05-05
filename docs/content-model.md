@@ -30,14 +30,15 @@ Primary sections:
 
 ## Static Data Files
 
-Prefer editing existing data files for content-only updates:
+Prefer editing the centralized home content files for content-only updates:
 
-- `src/components/grid/experience/experience-data.ts`
-- `src/components/grid/experience/education-data.ts`
-- `src/components/grid/skills/skills-data.ts`
-- `src/components/grid/contacts/contacts-data.tsx`
+- `src/content/home/projects.ts`
+- `src/content/home/experience.ts`
+- `src/content/home/education.ts`
+- `src/content/home/skills.ts`
+- `src/content/home/contacts.ts`
 
-If new content becomes complex, colocate its data file with the section that renders it.
+Shared content types live in `src/content/home/types.ts`.
 
 ## Public Assets
 
