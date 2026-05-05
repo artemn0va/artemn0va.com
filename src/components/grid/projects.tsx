@@ -123,6 +123,24 @@ const projects: ProjectItem[] = [
 
 const sideProjects: ProjectItem[] = [
   {
+    id: 'artemn0va-com',
+    period: '2026',
+    title: 'artemn0va.com',
+    subtitle: 'Personal Portfolio Website',
+    tasks: [
+      'Built a personal portfolio website to present projects, experience, and interactive frontend work in a single polished space.',
+      'Structured the homepage as a responsive content grid with custom sections for case studies, contact flows, and live showcases.',
+      'Continuously refine the site as an evolving product and a public representation of design and frontend engineering standards.',
+    ],
+    technologies: [
+      { skillId: 'nextjs', label: 'Next.js' },
+      { skillId: 'ts', label: 'TS' },
+      { skillId: 'tailwind', label: 'TW' },
+      { skillId: 'figma', label: 'Figma' },
+      { skillId: 'vercel', label: 'Vercel' },
+    ],
+  },
+  {
     id: 'nadya-besson-photography',
     period: '2024',
     title: 'Nadya Besson Photography',
