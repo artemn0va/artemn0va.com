@@ -31,7 +31,10 @@ export default function Experience() {
   ];
 
   return (
-    <ScrollArea className='experience bg-page dark:bg-section-dark shadow-section-outer dark:shadow-section-outer-dark 2xl:bg-section-dark 2xl:dark:bg-page 2xl:shadow-section-outer-dark 2xl:dark:shadow-section-outer rounded-xl'>
+    <ScrollArea
+      isThemeRevert
+      className='experience bg-page dark:bg-section-dark shadow-section-outer dark:shadow-section-outer-dark 2xl:bg-section-dark 2xl:dark:bg-page 2xl:shadow-section-outer-dark 2xl:dark:shadow-section-outer rounded-xl'
+    >
       <Section
         id='experience'
         className='flex flex-col gap-y-4 px-4 pt-3.5 pb-5'
