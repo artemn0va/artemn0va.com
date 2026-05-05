@@ -30,8 +30,44 @@ type ProjectTechnology = {
 
 const projects: ProjectItem[] = [
   {
+    id: 'mdb-studio',
+    period: '2026',
+    title: 'MDB Studio',
+    subtitle: 'Design Studio Landing Page',
+    tasks: [
+      'Built a premium one-page studio website with bold typography, motion, and a polished dark visual direction.',
+      'Structured the landing experience around startup positioning, client credibility, and a direct lead capture flow.',
+      'Delivered a high-conversion marketing page that presents identity, web, and product design services as a focused premium offer.',
+    ],
+    technologies: [
+      { skillId: 'nextjs', label: 'Next.js' },
+      { skillId: 'ts', label: 'TS' },
+      { skillId: 'tailwind', label: 'TW' },
+      { skillId: 'figma', label: 'Figma' },
+      { skillId: 'vercel', label: 'Vercel' },
+    ],
+  },
+  {
+    id: 'refframe-landing',
+    period: '2025',
+    title: 'Refframe Landing',
+    subtitle: 'Product Marketing Website',
+    tasks: [
+      'Built a landing page for Refframe, a reference platform for web designers focused on speed, clarity, and conversion.',
+      'Presented the product in English through clear messaging around AI tagging, boards, imports, and element-level filtering.',
+      'Structured the page to explain the workflow benefits, pricing, and product value for designers who work with large reference libraries.',
+    ],
+    technologies: [
+      { skillId: 'nextjs', label: 'Next.js' },
+      { skillId: 'ts', label: 'TS' },
+      { skillId: 'tailwind', label: 'TW' },
+      { skillId: 'figma', label: 'Figma' },
+      { skillId: 'vercel', label: 'Vercel' },
+    ],
+  },
+  {
     id: 'refframe',
-    period: '2025 - 2026',
+    period: '2025',
     title: 'Refframe',
     subtitle: 'UX/UI Reference Platform',
     tasks: [
@@ -48,30 +84,10 @@ const projects: ProjectItem[] = [
     ],
   },
   {
-    id: 'art-box-tm',
-    period: '2023',
-    title: 'Art Box TM',
-    subtitle: 'Online Store App',
-    tasks: [
-      'Built a multi-page online store with Next.js, TypeScript, SCSS modules, cloud infrastructure, and PostgreSQL.',
-      'Completed deployment on Vercel with Supabase.',
-      'Added testing with Jest and automated Postman tests.',
-    ],
-    technologies: [
-      { skillId: 'nextjs', label: 'Next.js' },
-      { skillId: 'ts', label: 'TS' },
-      { skillId: 'sass', label: 'SCSS' },
-      { skillId: 'postgresql', label: 'SQL' },
-      { skillId: 'vercel', label: 'Vercel' },
-      { skillId: 'jest', label: 'Jest' },
-      { skillId: 'postman', label: 'API' },
-    ],
-  },
-  {
     id: 'widegamut-landing',
     period: '2024',
-    title: 'Widegamut Landing Page',
-    subtitle: 'Pixel-Perfect Marketing Site',
+    title: 'Widegamut Landing',
+    subtitle: 'Product Marketing Website',
     tasks: [
       'Delivered a landing page from scratch to deployment in 3 days.',
       'Implemented the design pixel-perfect from Figma under a tight delivery timeline.',
@@ -83,6 +99,24 @@ const projects: ProjectItem[] = [
       { skillId: 'ts', label: 'TS' },
       { skillId: 'figma', label: 'Figma' },
       { skillId: 'vercel', label: 'Vercel' },
+    ],
+  },
+  {
+    id: 'widegamut',
+    period: '2024',
+    title: 'Widegamut',
+    subtitle: 'Filmmaker Portfolio Platform',
+    tasks: [
+      'Built a portfolio platform made by filmmakers for filmmakers, centered on showcasing work in stunning detail.',
+      'Implemented community-driven discovery flows for inspiration, exposure, and connection with industry professionals.',
+      'Shaped core product areas including waitlist onboarding, shared collections, and creator-focused plan presentation.',
+    ],
+    technologies: [
+      { skillId: 'react', label: 'React' },
+      { skillId: 'nextjs', label: 'Next.js' },
+      { skillId: 'ts', label: 'TS' },
+      { skillId: 'tailwind', label: 'TW' },
+      { skillId: 'figma', label: 'Figma' },
     ],
   },
 ];
@@ -107,6 +141,44 @@ const sideProjects: ProjectItem[] = [
     ],
   },
   {
+    id: 'ultracube-store',
+    period: '2024',
+    title: 'Ultracube Store',
+    subtitle: 'Speed Cube Retail Platform',
+    tasks: [
+      'Built an online store for Rubik’s cubes and puzzles focused on clear product browsing and a smooth shopping experience.',
+      'Implemented core storefront flows, product data integration, and client-side navigation across the shopping journey.',
+      'Delivered a polished interface with strong visual consistency and interaction details across the storefront.',
+    ],
+    technologies: [
+      { skillId: 'vue', label: 'Vue' },
+      { skillId: 'ts', label: 'TS' },
+      { skillId: 'sass', label: 'SCSS' },
+      { skillId: 'restapi', label: 'REST' },
+      { skillId: 'figma', label: 'Figma' },
+    ],
+  },
+  {
+    id: 'art-box-tm',
+    period: '2023',
+    title: 'Art Box Shop',
+    subtitle: 'DIY Art & Craft Marketplace',
+    tasks: [
+      'Built a multi-page online store focused on clear product browsing and a smooth customer journey.',
+      'Implemented core storefront flows, backend integration, and production deployment for a complete purchase experience.',
+      'Added automated testing to improve reliability and support long-term product development.',
+    ],
+    technologies: [
+      { skillId: 'nextjs', label: 'Next.js' },
+      { skillId: 'ts', label: 'TS' },
+      { skillId: 'sass', label: 'SCSS' },
+      { skillId: 'postgresql', label: 'SQL' },
+      { skillId: 'vercel', label: 'Vercel' },
+      { skillId: 'jest', label: 'Jest' },
+      { skillId: 'postman', label: 'API' },
+    ],
+  },
+  {
     id: 'devrel-hackathon',
     period: '2022',
     title: 'DevRel Hackathon App',
@@ -122,24 +194,6 @@ const sideProjects: ProjectItem[] = [
       { skillId: 'nodejs', label: 'Node' },
       { skillId: 'github', label: 'GitHub' },
       { skillId: 'restapi', label: 'REST' },
-    ],
-  },
-  {
-    id: 'hackwagon-hackathon',
-    period: '2022',
-    title: 'HackWagon Hackathon App',
-    subtitle: 'Multi-Form Frontend',
-    tasks: [
-      'Implemented the frontend in 3 days during a hackathon.',
-      'Built a web page with 16 forms that sent collected data to the backend.',
-      'Used React, TypeScript, and REST API integration while the team placed 8th out of 48 teams.',
-    ],
-    technologies: [
-      { skillId: 'react', label: 'React' },
-      { skillId: 'ts', label: 'TS' },
-      { skillId: 'restapi', label: 'REST' },
-      { skillId: 'html', label: 'HTML' },
-      { skillId: 'css', label: 'CSS' },
     ],
   },
 ];
