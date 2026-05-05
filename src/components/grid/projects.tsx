@@ -21,6 +21,10 @@ type ProjectItem = {
   subtitle: string;
   tasks: string[];
   technologies: ProjectTechnology[];
+  owner?: {
+    name: string;
+    avatarSrc: string;
+  };
 };
 
 type ProjectTechnology = {
@@ -214,6 +218,44 @@ const sideProjects: ProjectItem[] = [
       { skillId: 'restapi', label: 'REST' },
     ],
   },
+  {
+    id: 'pydew-valley',
+    period: '2022',
+    title: 'Pydew Valley',
+    subtitle: 'Stardew-Inspired Farming Game',
+    tasks: [
+      'Built a Stardew Valley-style game in Python with farming, foraging, and a merchant-driven gameplay loop that has reached 38 GitHub stars.',
+      'Implemented ambient world systems including weather effects and day-to-night progression to make the game feel more alive.',
+      'The project was later taken forward as a student base for continuing work on AI simulation game tools in a Swedish university group project.',
+      'Used Pygame with a Tiled-built map pipeline to structure the world, player movement, and interactive gameplay elements.',
+    ],
+    technologies: [
+      { skillId: 'python', label: 'Python' },
+      { skillId: 'python', label: 'Pygame' },
+      { skillId: 'python', label: 'Tiled' },
+      { skillId: 'git', label: 'Git' },
+      { skillId: 'github', label: 'GitHub' },
+    ],
+  },
+  {
+    id: 'pyzelda-rpg',
+    period: '2022',
+    title: 'PyZelda RPG',
+    subtitle: 'Zelda-Style Action RPG',
+    tasks: [
+      'Built a Zelda-style action RPG in Python and Pygame with melee combat, enemies, spells, upgrades, and audio, and the repo has reached 28 GitHub stars.',
+      'Used Tiled to build and organize the game world, level structure, and traversal flow for a classic top-down RPG feel.',
+      'Developed the project with multiple contributors, extending the original game work through collaborative improvements and follow-up fixes.',
+      'Used Pygame with a Tiled-built map pipeline to structure the world, player movement, and interactive gameplay elements.',
+    ],
+    technologies: [
+      { skillId: 'python', label: 'Python' },
+      { skillId: 'python', label: 'Pygame' },
+      { skillId: 'python', label: 'Tiled' },
+      { skillId: 'git', label: 'Git' },
+      { skillId: 'github', label: 'GitHub' },
+    ],
+  },
 ];
 
 function getTechnologySkill(skillId: string) {
@@ -230,15 +272,14 @@ function ProjectAccordion({ items }: Readonly<{ items: ProjectItem[] }>) {
               <Typography className='w-min min-[430px]:w-max'>
                 {item.period}
               </Typography>
-
-              <div className='flex flex-col items-start '>
-                <Typography variant='h3'>{item.title}</Typography>
-                <Typography
-                  size='sm'
-                  className='text-[#60656E] dark:text-[#D5D5D5]'
-                >
-                  {item.subtitle}
-                </Typography>
+                <div className='flex flex-col items-start '>
+                  <Typography variant='h3'>{item.title}</Typography>
+                  <Typography
+                    size='sm'
+                    className='text-[#60656E] dark:text-[#D5D5D5]'
+                  >
+                    {item.subtitle}
+                  </Typography>
               </div>
             </div>
           </AccordionTrigger>
@@ -280,7 +321,21 @@ function ProjectTechnologies({
           const skill = getTechnologySkill(technology.skillId);
 
           if (!skill) {
-            return null;
+            return (
+              <li
+                key={`${technology.skillId}-${technology.label}`}
+                className='flex h-8 max-w-max rounded-xl p-px shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87] dark:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59]'
+              >
+                <div className='flex h-full w-full items-center justify-center rounded-[11px] bg-[linear-gradient(134.17deg,#EEF0F5_4.98%,#E6E9EF_94.88%)] px-3 py-1.5 dark:bg-[linear-gradient(134.17deg,#3F4850_4.98%,#363E46_94.88%)]'>
+                  <Typography
+                    size='sm'
+                    className='text-center font-normal leading-5'
+                  >
+                    {technology.label}
+                  </Typography>
+                </div>
+              </li>
+            );
           }
 
           return (
