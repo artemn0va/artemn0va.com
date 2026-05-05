@@ -4,7 +4,7 @@ import { uid } from 'uid';
 import { tileCountPerDimension } from '@/components/grid/showcases/2048/constants';
 import { Tile, TileMap } from '@/components/grid/showcases/2048/models/tile';
 
-type State = {
+export type GameState = {
   board: string[][];
   tiles: TileMap;
   tilesByIds: string[];
@@ -29,7 +29,7 @@ function createBoard() {
   return board;
 }
 
-export const initialState: State = {
+export const initialState: GameState = {
   board: createBoard(),
   tiles: {},
   tilesByIds: [],
@@ -38,7 +38,7 @@ export const initialState: State = {
 };
 
 export default function gameReducer(
-  state: State = initialState,
+  state: GameState = initialState,
   action: Action
 ) {
   switch (action.type) {

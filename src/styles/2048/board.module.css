@@ -1,13 +1,15 @@
 .board {
+  --board-size: 304px;
+  --cell-size: 66px;
   position: relative;
-  width: 304px;
-  height: 304px;
+  width: var(--board-size);
+  height: var(--board-size);
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 66px);
-  grid-template-rows: repeat(4, 66px);
+  grid-template-columns: repeat(4, var(--cell-size));
+  grid-template-rows: repeat(4, var(--cell-size));
   background: var(--primary-background);
   padding: 8px;
   border-radius: 24px;
@@ -32,24 +34,14 @@
 
 @media (min-width: 768px) {
   .board {
-    width: 319px;
-    height: 319px;
-  }
-
-  .grid {
-    grid-template-columns: repeat(4, 70px);
-    grid-template-rows: repeat(4, 70px);
+    --board-size: 319px;
+    --cell-size: 70px;
   }
 }
 
 @media (min-width: 1440px) {
   .board {
-    width: 260px;
-    height: 260px;
-  }
-
-  .grid {
-    grid-template-columns: repeat(4, 55px);
-    grid-template-rows: repeat(4, 55px);
+    --board-size: 260px;
+    --cell-size: 55px;
   }
 }

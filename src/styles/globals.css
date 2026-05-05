@@ -132,3 +132,26 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  @keyframes portfolio-slide-pan {
+    0%,
+    12% {
+      object-position: center top;
+    }
+    88%,
+    100% {
+      object-position: center bottom;
+    }
+  }
+
+  .portfolio-slide-image {
+    animation: portfolio-slide-pan 16s ease-in-out infinite alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .portfolio-slide-image {
+      animation: none;
+    }
+  }
+}
