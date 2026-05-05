@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { Inter as FontSans } from 'next/font/google';
 import * as React from 'react';
 import { ReactNode } from 'react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import '@/styles/globals.css';
 import '@/styles/grid.css';
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: Readonly<Props>) {
           <main>{children}</main>
           <Toaster />
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
