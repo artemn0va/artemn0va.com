@@ -139,7 +139,7 @@ export const AccordionComponent: React.FC<AccordionProps> = ({ items }) => {
                 <Typography isThemeRevert variant='h4' size='sm'>
                   Technologies
                 </Typography>
-                <ul className='grid grid-cols-2 gap-2.5 min-[430px]:grid-cols-3'>
+                <ul className='flex flex-wrap gap-2.5'>
                   {item.technologies.map((technology) => {
                     const skill = getTechnologySkill(technology.skillId);
 
@@ -147,13 +147,13 @@ export const AccordionComponent: React.FC<AccordionProps> = ({ items }) => {
                       return (
                         <li
                           key={`${technology.skillId}-${technology.label}`}
-                          className='flex h-8 min-w-0 max-w-max rounded-xl p-px shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87] dark:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59] 2xl:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59] 2xl:dark:shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87]'
+                          className='flex h-8 max-w-max rounded-xl p-px shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87] dark:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59] 2xl:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59] 2xl:dark:shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87]'
                         >
                           <div className='flex h-full w-full items-center justify-center rounded-[11px] bg-[linear-gradient(134.17deg,#EEF0F5_4.98%,#E6E9EF_94.88%)] px-3 py-1.5 dark:bg-[linear-gradient(134.17deg,#3F4850_4.98%,#363E46_94.88%)] 2xl:bg-[linear-gradient(134.17deg,#3F4850_4.98%,#363E46_94.88%)] 2xl:dark:bg-[linear-gradient(134.17deg,#EEF0F5_4.98%,#E6E9EF_94.88%)]'>
                             <Typography
                               isThemeRevert
                               size='sm'
-                              className='truncate text-center font-normal leading-5'
+                              className='text-center font-normal leading-5'
                             >
                               {technology.label}
                             </Typography>
@@ -165,7 +165,7 @@ export const AccordionComponent: React.FC<AccordionProps> = ({ items }) => {
                     return (
                       <li
                         key={`${technology.skillId}-${technology.label}`}
-                        className='flex h-8 min-w-0 rounded-xl p-px shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87] dark:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59] 2xl:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59] 2xl:dark:shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87]'
+                        className='flex h-8 max-w-max rounded-xl p-px shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87] dark:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59] 2xl:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59] 2xl:dark:shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87]'
                       >
                         <div className='flex h-full w-full items-center justify-center gap-1 rounded-[11px] bg-[linear-gradient(134.17deg,#EEF0F5_4.98%,#E6E9EF_94.88%)] px-3 py-1.5 dark:bg-[linear-gradient(134.17deg,#3F4850_4.98%,#363E46_94.88%)] 2xl:bg-[linear-gradient(134.17deg,#3F4850_4.98%,#363E46_94.88%)] 2xl:dark:bg-[linear-gradient(134.17deg,#EEF0F5_4.98%,#E6E9EF_94.88%)]'>
                           <NextImage
@@ -179,7 +179,7 @@ export const AccordionComponent: React.FC<AccordionProps> = ({ items }) => {
                           <Typography
                             isThemeRevert
                             size='sm'
-                            className='truncate text-center font-normal leading-5'
+                            className='text-center font-normal leading-5'
                           >
                             {technology.label}
                           </Typography>
