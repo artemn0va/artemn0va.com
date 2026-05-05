@@ -1,5 +1,7 @@
 import educationData from '@/components/grid/experience/education-data';
 import experienceData from '@/components/grid/experience/experience-data';
+import skillsData from '@/components/grid/skills/skills-data';
+import NextImage from '@/components/next-image';
 import Typography from '@/components/typography';
 import {
   Accordion,
@@ -23,7 +25,7 @@ export default function Experience() {
     },
     {
       value: 'education',
-      label: 'Languages',
+      label: 'Education',
       content: <AccordionComponent items={educationData} />,
     },
   ];
@@ -35,7 +37,7 @@ export default function Experience() {
         className='flex flex-col gap-y-4 px-4 pt-3.5 pb-5'
       >
         <Typography isThemeRevert variant='h2' size='sm' className='ml-1'>
-          Experience & Languages
+          Experience & Education
         </Typography>
         <TabsComponent defaultValue='experience' items={tabsItems} />
       </Section>
@@ -80,25 +82,33 @@ type AccordionProps = {
     title: string;
     subtitle: string;
     achievements: Array<{ text: string }>;
+    technologies?: Array<{ skillId: string; label: string }>;
   }[];
 };
+
+function getTechnologySkill(skillId: string) {
+  return skillsData.find((skill) => skill.id === skillId);
+}
 
 export const AccordionComponent: React.FC<AccordionProps> = ({ items }) => {
   return (
     <Accordion
       type='single'
-      defaultValue='widegamut'
+      defaultValue={items[0]?.id}
       collapsible
       className='flex flex-col gap-y-3'
     >
       {items.map((item) => (
         <AccordionItem isThemeRevert key={item.id} value={item.id}>
           <AccordionTrigger isThemeRevert>
-            <div className='flex items-center gap-x-6'>
-              <Typography isThemeRevert className='w-min min-[430px]:w-max'>
+            <div className='grid w-full grid-cols-[96px_minmax(0,1fr)] items-center gap-x-3 min-[430px]:grid-cols-[112px_minmax(0,1fr)] min-[430px]:gap-x-4'>
+              <Typography
+                isThemeRevert
+                className='w-full tabular-nums whitespace-nowrap'
+              >
                 {item.date}
               </Typography>
-              <div className='flex flex-col items-start'>
+              <div className='flex min-w-0 flex-col items-start'>
                 <Typography isThemeRevert variant='h3'>
                   {item.title}
                 </Typography>
@@ -124,6 +134,64 @@ export const AccordionComponent: React.FC<AccordionProps> = ({ items }) => {
                 </li>
               ))}
             </ul>
+            {item.technologies?.length ? (
+              <div className='mt-5 flex flex-col gap-y-4'>
+                <Typography isThemeRevert variant='h4' size='sm'>
+                  Technologies
+                </Typography>
+                <ul className='flex flex-wrap gap-2.5'>
+                  {[...item.technologies]
+                    .sort((a, b) => b.label.length - a.label.length)
+                    .map((technology) => {
+                      const skill = getTechnologySkill(technology.skillId);
+
+                      if (!skill) {
+                        return (
+                          <li
+                            key={`${technology.skillId}-${technology.label}`}
+                            className='flex h-8 max-w-max rounded-xl p-px shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87] dark:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59] 2xl:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59] 2xl:dark:shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87]'
+                          >
+                            <div className='flex h-full w-full items-center justify-center rounded-[11px] bg-[linear-gradient(134.17deg,#EEF0F5_4.98%,#E6E9EF_94.88%)] px-3 py-1.5 dark:bg-[linear-gradient(134.17deg,#3F4850_4.98%,#363E46_94.88%)] 2xl:bg-[linear-gradient(134.17deg,#3F4850_4.98%,#363E46_94.88%)] 2xl:dark:bg-[linear-gradient(134.17deg,#EEF0F5_4.98%,#E6E9EF_94.88%)]'>
+                              <Typography
+                                isThemeRevert
+                                size='sm'
+                                className='text-center font-normal leading-5'
+                              >
+                                {technology.label}
+                              </Typography>
+                            </div>
+                          </li>
+                        );
+                      }
+
+                      return (
+                        <li
+                          key={`${technology.skillId}-${technology.label}`}
+                          className='flex h-8 max-w-max rounded-xl p-px shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87] dark:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59] 2xl:shadow-[8px_9px_8px_-6px_#23282DCC,-3px_-3px_6px_0px_#48535C59] 2xl:dark:shadow-[8px_9px_8px_-6px_#A6B4C8D9,-5px_-5px_20px_0px_#FFFFFF87]'
+                        >
+                          <div className='flex h-full w-full items-center justify-center gap-1 rounded-[11px] bg-[linear-gradient(134.17deg,#EEF0F5_4.98%,#E6E9EF_94.88%)] px-3 py-1.5 dark:bg-[linear-gradient(134.17deg,#3F4850_4.98%,#363E46_94.88%)] 2xl:bg-[linear-gradient(134.17deg,#3F4850_4.98%,#363E46_94.88%)] 2xl:dark:bg-[linear-gradient(134.17deg,#EEF0F5_4.98%,#E6E9EF_94.88%)]'>
+                            <NextImage
+                              className='h-[19px] w-[19px] overflow-hidden rounded-full'
+                              src={skill.src}
+                              alt=''
+                              width={19}
+                              height={19}
+                              unoptimized
+                            />
+                            <Typography
+                              isThemeRevert
+                              size='sm'
+                              className='text-center font-normal leading-5'
+                            >
+                              {technology.label}
+                            </Typography>
+                          </div>
+                        </li>
+                      );
+                    })}
+                </ul>
+              </div>
+            ) : null}
           </AccordionContent>
         </AccordionItem>
       ))}

@@ -1,46 +1,75 @@
 const educationData = [
   {
-    id: 'hebrew',
-    date: 'HE',
-    title: 'Hebrew',
-    subtitle: 'Full Professional Proficiency',
+    id: 'self-taught',
+    date: '2022 - 2023',
+    title: 'Self-taught',
+    subtitle: 'Web Development',
     achievements: [
       {
-        text: 'Comfortable working with Hebrew-speaking teams, product context, and client communication.',
+        text: 'Completed a focused self-paced web development track across modern frontend and backend tooling.',
       },
+      {
+        text: 'Built practical fluency in TypeScript-based product development through hands-on learning and implementation.',
+      },
+    ],
+    technologies: [
+      { skillId: 'ts', label: 'TS' },
+      { skillId: 'nextjs', label: 'Next.js' },
+      { skillId: 'redux', label: 'Redux' },
+      { skillId: 'mobx', label: 'MobX' },
+      { skillId: 'sass', label: 'SCSS' },
+      { skillId: 'tailwind', label: 'Tailwind' },
+      { skillId: 'nestjs', label: 'NestJS' },
+      { skillId: 'postgresql', label: 'SQL' },
+      { skillId: 'supabase', label: 'Supabase' },
+      { skillId: 'graphql', label: 'GraphQL' },
+      { skillId: 'prisma', label: 'Prisma' },
     ],
   },
   {
-    id: 'ukrainian',
-    date: 'UA',
-    title: 'Ukrainian',
-    subtitle: 'Native or Bilingual Proficiency',
+    id: 'practicum-israel',
+    date: '2020 - 2021',
+    title: 'Practicum Israel',
+    subtitle: 'Web Development',
     achievements: [
       {
-        text: 'Native-level fluency for written and spoken communication.',
+        text: 'Completed a web development program covering frontend, backend, databases, and deployment fundamentals.',
       },
+      {
+        text: 'Took on extra responsibilities as a senior student, including peer mentoring, group leadership, and program representation.',
+      },
+    ],
+    technologies: [
+      { skillId: 'react', label: 'React' },
+      { skillId: 'nodejs', label: 'Node' },
+      { skillId: 'html', label: 'HTML' },
+      { skillId: 'css', label: 'CSS' },
+      { skillId: 'js', label: 'JS' },
+      { skillId: 'express', label: 'Express' },
+      { skillId: 'mongodb', label: 'Mongo' },
+      { skillId: 'nginx', label: 'Nginx' },
+      { skillId: 'css', label: 'BEM' },
     ],
   },
   {
-    id: 'english',
-    date: 'EN',
-    title: 'English',
-    subtitle: 'Professional Working Proficiency',
+    id: 'mipt-practical-programming',
+    date: '2018 - 2019',
+    title: 'MIPT',
+    subtitle: 'Practical Programming',
     achievements: [
       {
-        text: 'Used for cross-functional collaboration, documentation, technical discussion, and product delivery.',
+        text: 'Completed a structured programming course built around lectures, labs, and reviewed homework.',
+      },
+      {
+        text: 'Strengthened core engineering fundamentals across Python, algorithms, Linux, Git, and web development basics.',
       },
     ],
-  },
-  {
-    id: 'russian',
-    date: 'RU',
-    title: 'Russian',
-    subtitle: 'Native or Bilingual Proficiency',
-    achievements: [
-      {
-        text: 'Native-level fluency for written and spoken communication.',
-      },
+    technologies: [
+      { skillId: 'python', label: 'Python' },
+      { skillId: 'python', label: 'Web' },
+      { skillId: 'python', label: 'Algorithms' },
+      { skillId: 'linux', label: 'Linux' },
+      { skillId: 'git', label: 'Git' },
     ],
   },
 ];

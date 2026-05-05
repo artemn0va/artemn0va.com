@@ -55,6 +55,11 @@ const skillsData = [
     name: 'Redux',
   },
   {
+    id: 'mobx',
+    src: 'https://skillicons.dev/icons?i=redux',
+    name: 'MobX',
+  },
+  {
     id: 'nodejs',
     src: 'https://skillicons.dev/icons?i=nodejs',
     name: 'Node',
@@ -88,6 +93,31 @@ const skillsData = [
     id: 'mongodb',
     src: 'https://skillicons.dev/icons?i=mongo',
     name: 'Mongo',
+  },
+  {
+    id: 'firebase',
+    src: 'https://skillicons.dev/icons?i=firebase',
+    name: 'Firebase',
+  },
+  {
+    id: 'supabase',
+    src: 'https://skillicons.dev/icons?i=supabase',
+    name: 'Supabase',
+  },
+  {
+    id: 'graphql',
+    src: 'https://skillicons.dev/icons?i=graphql',
+    name: 'GraphQL',
+  },
+  {
+    id: 'prisma',
+    src: 'https://skillicons.dev/icons?i=prisma',
+    name: 'Prisma',
+  },
+  {
+    id: 'nginx',
+    src: 'https://skillicons.dev/icons?i=nginx',
+    name: 'Nginx',
   },
   {
     id: 'docker',
